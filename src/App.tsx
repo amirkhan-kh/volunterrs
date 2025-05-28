@@ -1,11 +1,12 @@
 import { Outlet } from "react-router"
 import { Footer, Header } from "./components"
+import './index.css'
 function App() {
 
   return (
-    <div className='mx-auto'>
+    <div className=''>
       <Header/>
-      <main>
+      <main className="min-h-screen">
         <Outlet/>
       </main>
       <Footer/>

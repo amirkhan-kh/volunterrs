@@ -1,0 +1,43 @@
+.custom{
+   border: none;
+   outline: none;
+   box-shadow: none;
+   background-color: transparent;
+
+   
+}
+  .custom-element {
+  border: none;
+  outline: none;
+  box-shadow: none;
+  background-color: transparent;
+  transition: all 0.4s ease-in-out;
+  animation: fadeZoomIn 0.4s ease-in-out;
+  cursor: pointer;
+}
+
+.custom-element:focus {
+  outline: none;
+  box-shadow: none;
+  border: none;
+}
+
+.custom-element:hover {
+  background-color: transparent;
+}
+
+.custom-element[data-state="open"] {
+  box-shadow: none;
+  border: none;
+}
+
+@keyframes fadeZoomIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

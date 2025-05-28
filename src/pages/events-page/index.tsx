@@ -1,9 +1,12 @@
+import { Intro } from '@/components/main-sections'
+import { NewsSectionNews } from '@/components/sections/news'
 import React from 'react'
 
 const Events: React.FC = () => {
   return (
     <div>
-      Events
+      <Intro/>
+      <NewsSectionNews/>
     </div>
   )
 }

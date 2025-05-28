@@ -1,0 +1,10 @@
+.footer{
+
+    li{
+        transition: 0.3s;
+        &:hover{
+            font-weight: 400;
+            transform: scale(100.4%);
+        }
+    }
+}
