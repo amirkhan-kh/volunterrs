@@ -3,19 +3,23 @@ export type TSlideContent = {
   title: string;
   subtitle: string;
 };
+
+import intro1 from '../../public/images/intro1 14.png';
+import intro2 from '../../public/voluntermedia/icons/homeIcon/activ7.png';
+
 export const sliderContent: TSlideContent [] = [
   {
-    image: '../../../../public/images/intro1 14.png',
+    image: intro1 ,
     title: 'Kuchlilik nazariyasi',
     subtitle: 'BILIM, AMALIYOT VA TAJRIBA UCHUN BIRLASHDIK!',
   },
   {
-    image: '../../public/voluntermedia/icons/homeIcon/activ7.png',
+    image: intro2,
     title: 'Ishonch va Harakat',
     subtitle: 'Yoshlar harakati orqali ijtimoiy o‘zgarishlar sari!',
   },
   {
-    image:'../../public/images/activ1.png',
+    image:intro1 ,
     title: 'O‘sish sari yo‘l',
     subtitle: 'Intilish, bilim va birlik — kelajakka yo‘l!',
   },
