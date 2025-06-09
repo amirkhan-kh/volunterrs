@@ -1,87 +1,91 @@
 import React, { useEffect } from "react";
 import { IoCallOutline } from "react-icons/io5";
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-  Form,
-} from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Lottie from "lottie-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import phoneAnime from '../../../../public/voluntermedia/animation/Animation - 1747729307329.json'
-import phoneAnimeGreen from '../../../../public/voluntermedia/animation/greenstep1.json'
-import logo from '../../../../public/voluntermedia/Logo.png'
-import './_style.scss'
-import type { RootState } from "@/store/store-config";
+import phoneAnime from "../../../../public/voluntermedia/animation/Animation - 1747729307329.json";
+import phoneAnimeGreen from "../../../../public/voluntermedia/animation/greenstep1.json";
+import logo from "../../../../public/voluntermedia/Logo.png";
+import "./_style.scss";
 import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, type RootState } from "@/store/store-config";
 import { setRole } from "@/store/role-slice";
-
-
-
+import { sendCode } from "@/store/login-slice";
 
 const formSchema = z.object({
-  phoneNumber: z.string().min(2, {
-    message: "Number must be at least 2 characters.",
-  }),
+  phoneNumber: z
+    .string()
+    .min(9, { message: "Telefon raqam kamida 9 ta raqamdan iborat bo'lishi kerak." })
+    .max(13, { message: "Telefon raqam maksimal 13 ta belgidan oshmasligi kerak." }),
 });
+
 export const Step1: React.FC = () => {
-
-  const role = useSelector((state: RootState) => state.role.role);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-      const storedRole = localStorage.getItem("role") as
-        | "volunterr"
-        | "investor"
-        | null;
-      if (storedRole && !role) {
-        dispatch(setRole(storedRole));
-      }
-    }, [dispatch, role]);
+  const role = useSelector((state: RootState) => state.role.role);
+  const dispatchApp = useAppDispatch();
 
 
-  const form1 = useForm<z.infer<typeof formSchema>>({
+ useEffect(() => {
+  let storedRole = localStorage.getItem("role") as "volunterr" | "investor" | null;
+
+  if (!storedRole) {
+    storedRole = "volunterr";
+    localStorage.setItem("role", storedRole); 
+  }
+
+  dispatch(setRole(storedRole));
+}, [dispatch]);
+
+
+  const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       phoneNumber: "",
     },
   });
-  function onSubmit1(values: z.infer<typeof formSchema>) {
-    console.log(values);
+
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    const result = await dispatchApp(sendCode(values.phoneNumber));
+    console.log(result);
+    
+    if (sendCode.fulfilled.match(result)) {
+    console.log("SMS yuborildi:", result.payload);
+    } else {
+    console.error("Xatolik:", result.payload || result.error);
+    console.log(result.payload || "SMS yuborishda xatolik yuz berdi");
   }
+    
+    
+  };
+  console.log(sendCode);
 
   const animationToShow = role === "investor" ? phoneAnimeGreen : phoneAnime;
 
   return (
     <div className="custom container mx-auto h-screen flex flex-col justify-center p-20 gap-8">
-      <div className="flex w-full ">
+      <div className="flex w-full">
         <img src={logo} alt="Logo Oltin qanot" className="w-[100px]" />
-        <span></span>
       </div>
-      <div className="flex items-center justify-between ">
-        <div id={role === "volunterr" ? "step1" : undefined} className=" p-0">
+
+      <div className="flex items-center justify-between">
+        <div id={role === "volunterr" ? "step1" : undefined} className="p-0">
           <Lottie
             animationData={animationToShow}
             loop
             autoplay
-            style={{ height: "400px", width: "380px",  }}
+            style={{ height: "400px", width: "380px" }}
           />
         </div>
 
-        <div className=" backdrop-blur-md bg-[rgba(255,255,255,0.7)] shadow w-[500px] h-[260px] rounded-[12px] py-7 px-4">
-          <Form {...form1}>
-            <form
-              onSubmit={form1.handleSubmit(onSubmit1)}
-              className="space-y-6"
-            >
+        <div className="backdrop-blur-md bg-[rgba(255,255,255,0.7)] shadow w-[500px] h-[260px] rounded-[12px] py-7 px-4">
+          <Form {...form}>
+           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               <FormField
-                control={form1.control}
+                control={form.control}
                 name="phoneNumber"
                 render={({ field }) => (
                   <FormItem>
@@ -89,35 +93,39 @@ export const Step1: React.FC = () => {
                       Tizimga kirish
                     </FormLabel>
                     <FormControl>
-                      <>
-                        <p className={`text-sm  mb-1 ${role === "volunterr" ? "text-[#2F508C]" : "text-[#808080CC]"}`}>
+                      <div>
+                        <p
+                          className={`text-sm mb-1 ${
+                            role === "volunterr" ? "text-[#2F508C]" : "text-[#808080CC]"
+                          }`}
+                        >
                           Telefon raqamingizni kiriting
                         </p>
                         <div className="relative">
-                          {/* Ikonka */}
                           <span className="absolute inset-y-0 right-4 flex items-center pl-3 text-gray-500">
                             <IoCallOutline />
                           </span>
-
-                          {/* Input */}
                           <Input
+                            {...field}
                             placeholder="+998"
                             type="tel"
-                            {...field}
-                            className="py-2 px-3.5 border border-[#A1A1A1]"
+                            className="py-2 px-3.5 border border-[#A1A1A1] pr-10"
                           />
                         </div>
-                      </>
+                      </div>
                     </FormControl>
-
                     <FormMessage />
                   </FormItem>
                 )}
               />
+
               <Button
-                type="submit"
-                className={`w-full text-[18px] font-semibold py-4 
-                 ${role === "volunterr" ? "bg-[#6495ED] hover:bg-[#6494eded]" : "bg-[#39B55D] hover:bg-[#39B55D]"}`}
+              type="submit" 
+                className={`w-full text-[18px] font-semibold py-4 ${
+                  role === "volunterr"
+                    ? "bg-[#6495ED] hover:bg-[#6494eded]"
+                    : "bg-[#39B55D] hover:bg-[#39B55D]"
+                }`}
               >
                 Kirish
               </Button>

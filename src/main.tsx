@@ -1,3 +1,4 @@
+import './lang/i18n.js';
 import { RouterProvider } from 'react-router-dom';
 import { router } from './router/main-router';
 import { createRoot } from 'react-dom/client';

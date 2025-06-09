@@ -7,6 +7,8 @@ import AdminDashboard from "../pages-dashboard";
 import InvestorPage from "@/pages/investor-page";
 import DonationPage from "@/pages/donation-page";
 import SinglePage from "@/pages/single-page";
+import ProfileVolunterr from "@/pages/profile-volunter";
+import ProfileInvestor from "@/pages/profile-investor";
 
 
 export const router = createBrowserRouter([
@@ -27,7 +29,9 @@ export const router = createBrowserRouter([
     { path: "/volontyorlik-nima", element: <VolonyorlikNima /> },
     { path: "/investor-page", element: <InvestorPage/>},
     { path: "/donation-page", element: <DonationPage/>},
-    { path: "/single-page/:id", element: <SinglePage/>}
+    { path: "/single-page/:id", element: <SinglePage/>},
+    { path: "/profile-volunter", element: <ProfileVolunterr/>},
+    { path: "/profile-investor", element: <ProfileInvestor/>}
   ],
 },
 

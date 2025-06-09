@@ -1,19 +1,19 @@
 import React, { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { NavLink, useLocation } from "react-router-dom";
+import { Button } from "../ui/button";
+import { SheetNavigation } from "../ui-elements/sheet-navigation";
+import { BottomNavbar } from "../ui-elements/bottom-nav";
+import BtnNavBottom from "../ui-elements/bottom-nav-btn";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { IoIosClose } from "react-icons/io";
 import homeLogo from "../../../public/images/logo 1.png";
 import { CiSearch } from "react-icons/ci";
 import { VscGlobe } from "react-icons/vsc";
-// import { RiUserLine } from "react-icons/ri";
-import { Button } from "../ui/button";
 import NavDropdaownAbout, {
   NavDropdaownVolunterrs,
 } from "@/components/ui-elements/nav-dropdawn";
-import { SheetNavigation } from "../ui-elements/sheet-navigation";
-import { BottomNavbar } from "../ui-elements/bottom-nav";
-import BtnNavBottom from "../ui-elements/bottom-nav-btn";
-import { AnimatePresence, motion } from "framer-motion";
 import "./_style.scss";
 
 const Header: React.FC = () => {
@@ -21,7 +21,6 @@ const Header: React.FC = () => {
   const [showlang, setShowlang] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-
   const getTitleFromPath = (path: string) => {
     switch (path) {
       case "/about-page":
@@ -34,10 +33,28 @@ const Header: React.FC = () => {
         return "YANGILIKLAR";
       case "/volunterrs-page":
         return "KO‘NGILLILAR";
-
+      case "/tariximiz":
+        return "TARIXIMIZ";
+      case "/jamoamiz":
+        return "JAMOAMIZ";
+      case "/rasmlar":
+        return "RASMLAR";
+      case "/volontyorlik-nima":
+        return "VOLANTYORLIK NIMA";
+      case "/investor-page":
+        return "INVESTOR";
+      case "/donation-page":
+        return "DONATION";
       default:
         return "OLTIN QANOT";
     }
+  };
+
+  const { t } = useTranslation("Header");
+  const { i18n } = useTranslation();
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+    setShowlang(false);
   };
 
   return (
@@ -45,19 +62,32 @@ const Header: React.FC = () => {
       <header className="z-50 relative">
         <div className="container mx-auto px-2 md:px-3  lg:px-10  py-1.5">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4 md:space-x-14 lg:space-x-6  ">
-              <div className="block md:hidden">
+            <div className="flex items-center space-x-4 md:space-x-2 lg:space-x-6  ">
+              <div className="block sm:hidden">
                 <SheetNavigation />
               </div>
               <img src={homeLogo} alt="bosh logo" className="hidden md:block" />
-              <div className="lg:block ">
-                <h1 className="text-[20px] font-bold text-[#6495ED] md:hidden">
-                  {getTitleFromPath(location.pathname)}
-                </h1>
-
-                <h1 className="text-[20px] font-bold text-[#6495ED] hidden md:block">
-                  OLTIN QANOT
-                </h1>
+               {!showSearch && (
+              <div className="block md:hidden">
+                <div className="lg:block ">
+                  <h1 className="text-[20px] font-bold text-[#6495ED] md:hidden">
+                    {getTitleFromPath(location.pathname)}
+                  </h1>
+                  <h1 className="text-[20px] font-bold text-[#6495ED] hidden md:block">
+                    OLTIN QANOT
+                  </h1>
+                </div>
+              </div>
+              )}
+               <div className="hidden md:block">
+                <div className="lg:block ">
+                  <h1 className="text-[20px] font-bold text-[#6495ED] md:hidden">
+                    {getTitleFromPath(location.pathname)}
+                  </h1>
+                  <h1 className="text-[20px] font-bold text-[#6495ED] hidden md:block">
+                    OLTIN QANOT
+                  </h1>
+                </div>
               </div>
             </div>
             <div className="flex items-center gap-8">
@@ -70,7 +100,7 @@ const Header: React.FC = () => {
                     }
                   >
                     <li className="text-[15px] font-semibold leading-[24px] w-24">
-                      Bosh Sahifa
+                      {t("nav1")}
                     </li>
                   </NavLink>
                   <li className="flex items-center gap-1 text-[15px] font-semibold leading-[24px]">
@@ -85,7 +115,7 @@ const Header: React.FC = () => {
                     }
                   >
                     <li className="text-[15px] font-semibold leading-[24px] ">
-                      Tadbirlar
+                      {t("nav2")}
                     </li>
                   </NavLink>
                   <NavLink
@@ -95,7 +125,7 @@ const Header: React.FC = () => {
                     }
                   >
                     <li className="text-[15px] font-semibold leading-[24px] ">
-                      Yangiliklar
+                      {t("nav3")}
                     </li>
                   </NavLink>
                   <NavLink
@@ -111,10 +141,10 @@ const Header: React.FC = () => {
                 </ul>
               )}
               {showSearch && !showlang && (
-                <div className="flex items-center gap-1 border border-[#6495ED] rounded-md py-[2px] px-1 pl-3 transition-all duration-300 w-[300px] lg:w-[600px]">
+                <div className="flex items-center gap-1 border border-[#6495ED] rounded-md py-[2px] px-1 pl-3 transition-all duration-300 w-full md:w-[200px] lg:w-[400px]">
                   <input
                     type="text"
-                    placeholder="Izlash..."
+                    placeholder={t("searchInput")}
                     className="w-full outline-none text-[12px]"
                   />
                   <Button
@@ -124,14 +154,14 @@ const Header: React.FC = () => {
                     <IoIosClose color="#6495ED" />
                   </Button>
                   <Button className="h-[30px] bg-[#6495ED] text-white hover:bg-[#6494edcf] text-[10px] rounded-md">
-                    Qidirish
+                    {t("searchInput")}
                   </Button>
                 </div>
               )}
 
               {!showSearch && !showlang && (
                 <Button
-                  className="bg-transparent p-0 hover:bg-transparent"
+                  className=" bg-transparent p-0 hover:bg-transparent"
                   onClick={() => setShowSearch(true)}
                 >
                   <CiSearch className="text-black font-bold w-[24px] h-[24px]" />
@@ -140,47 +170,54 @@ const Header: React.FC = () => {
               <div className="flex items-center gap-2">
                 {showlang && (
                   <div className="flex border border-[#6495ED] rounded-[6px]  px-4 py-1 gap-4">
-                    <button className="bg-[#fbfdff] hover:bg-[#fbfdff] text-[#2F2E2E] hover:cursor-pointer ">
+                    <button
+                      onClick={() => changeLanguage("uz")}
+                      className="bg-[#fbfdff] hover:bg-[#fbfdff] text-[#2F2E2E] hover:cursor-pointer "
+                    >
                       UZB
                     </button>
-                    <button className="bg-[#fbfdff] hover:bg-[#fbfdff] text-[#2F2E2E] hover:cursor-pointer ">
+                    <button
+                      onClick={() => changeLanguage("ru")}
+                      className="bg-[#fbfdff] hover:bg-[#fbfdff] text-[#2F2E2E] hover:cursor-pointer "
+                    >
                       RUS
                     </button>
-                    <button className="bg-[#fbfdff] hover:bg-[#fbfdff] text-[#2F2E2E] hover:cursor-pointer ">
+                    <button
+                      onClick={() => changeLanguage("en")}
+                      className="bg-[#fbfdff] hover:bg-[#fbfdff] text-[#2F2E2E] hover:cursor-pointer "
+                    >
                       USA
                     </button>
                     <button
                       onClick={() => setShowlang((prev) => !prev)}
-                      className=" md:bg-[#fbfdff] hover:bg-[#fbfdff] text-[#2F2E2E] hover:cursor-pointer border-l border-[#6495ED] pl-2"
+                      className=" md:block bg-[#fbfdff] hover:bg-[#fbfdff] text-[#2F2E2E] hover:cursor-pointer border-l border-[#6495ED] pl-2"
                     >
                       {" "}
                       <VscGlobe size={18} color="#6495ED" />
                     </button>
                   </div>
                 )}
+                <Button
+                  variant="outline"
+                  className="hidden md:block border border-[#6495ED] "
+                >
+                  <NavLink to="/login">{t("btn1")}</NavLink>
+                </Button>
                 {!showlang && (
                   <Button
                     variant="outline"
-                    className="border border-[#6495ED] "
+                    className="hidden md:block border border-[#6495ED] "
                     onClick={() => setShowlang((prev) => !prev)}
                   >
                     {/* lang */}
                     <VscGlobe color="#6495ED" />
                   </Button>
                 )}
-                <Button
-                  variant="outline"
-                  className=" hidden md:border border-[#6495ED] text-[#6495ED] hover:text-[#6f9bed]"
-                >
-                  A'zo bo'lish
-                </Button>
-                <Button className="bg-[#6495ED] text-white hover:bg-[#7ea8f5]">
-                  <NavLink to="/donation-page">
 
-                  Hayriya
-                  </NavLink>
+                <Button className="hidden md:block bg-[#6495ED] text-white hover:bg-[#7ea8f5]">
+                  <NavLink to="/donation-page">{t("btn2")}</NavLink>
                 </Button>
-                <div className="hidden md:block">
+                <div className="hidden sm:block">
                   <BtnNavBottom isOpen={isOpen} setIsOpen={setIsOpen} />
                 </div>
               </div>
@@ -193,10 +230,10 @@ const Header: React.FC = () => {
           {isOpen && (
             <motion.div
               initial={{ opacity: 0, y: -30 }}
-              animate={{ opacity: 1, y: 0 }}
+              animate={{ opacity: 1, y: -10 }}
               exit={{ opacity: 0, y: -30 }}
               transition={{ duration: 0.3 }}
-              className="bg-[rgba(255,255,255,0.7)] backdrop-blur-1xl z-50 absolute    w-full"
+              className="hidden sm:block bg-[rgba(255,255,255,0)] backdrop-blur-1xl z-50 absolute    w-full"
             >
               <BottomNavbar />
             </motion.div>

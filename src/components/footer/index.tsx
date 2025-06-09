@@ -110,7 +110,7 @@ const Footer: React.FC = () => {
       <div className="bg-[#07142D] px-[100px] flex items-center justify-center sm:block py-5">
         <div className="flex items-center justify-between">
           <p className="text-[#A3A3A3] hidden sm:flex items-center text-[12px] tracking-wide">
-            <MdCopyright /> Oltin Qanot. Website{currentYear}
+            <MdCopyright /> Oltin Qanot. Website <span> {currentYear}</span>
           </p>
           <ul className="flex items-center gap-6">
             <a href="#">

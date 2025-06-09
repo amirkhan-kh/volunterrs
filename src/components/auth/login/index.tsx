@@ -9,15 +9,13 @@ import "./_style.scss";
 import GreenStep3 from "@/components/ui-elements/step-forms/step-green3";
 
 const Login: React.FC = () => {
-  const [step, setStep] = useState(3);
-  // const [phone, setPhone] = useState("");
-  // const [code, setCode] = useState("");
-  // const [userInfo, setUserInfo] = useState({ name: "", email: "" });
+  const [step, setStep] = useState(1);
   const handleNext = () => setStep((prev) => prev + 1);
   console.log(handleNext);
 
-  // const handleBack = () => setStep((prev) => prev - 1);
   const role = useSelector((state: RootState) => state.role.role);
+  console.log(role);
+  
   const dispatch = useDispatch();
   useEffect(() => {
     const storedRole = localStorage.getItem("role") as
@@ -29,9 +27,9 @@ const Login: React.FC = () => {
     }
   }, [dispatch, role]);
   const backgroundImages =
-    role === "volunterr"
-      ? `url("/voluntermedia/icons/login/loginBlue/wave2.png"), url("/voluntermedia/icons/login/loginBlue/wave1.png")`
-      : `url("/voluntermedia/icons/login/loginGreen/logingreen 1.png"), url("/voluntermedia/icons/login/loginGreen/logingreen2.png")`;
+    role === "investor"
+    ? `url("/voluntermedia/icons/login/loginGreen/logingreen 1.png"), url("/voluntermedia/icons/login/loginGreen/logingreen2.png")`
+    : `url("/voluntermedia/icons/login/loginBlue/wave2.png"), url("/voluntermedia/icons/login/loginBlue/wave1.png")`
 
   return (
     <div id="login">

@@ -5,8 +5,21 @@ import { PiCalendarBold } from "react-icons/pi";
 import { newsDb } from "@/db/news";
 import { statisticCard } from "@/db/statistic";
 import "./_style.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { setRole } from "@/store/role-slice";
+import type { RootState } from "@/store/store-config";
+console.log(setRole);
 
 const HomeNews: React.FC = () => {
+  const dispatch = useDispatch();
+   const role = useSelector((state: RootState) => state.role.role);
+  console.log(role);
+
+  const handleChange = (title: string) => {
+    if (title === "Volunterlar") dispatch(setRole("volunterr"));
+    else if (title === "Investor") dispatch(setRole("investor"));
+  };
+  
 
    const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, projectId: number) => {
     e.preventDefault();
@@ -54,14 +67,16 @@ const HomeNews: React.FC = () => {
 
       <div className="flex gap-8">
         {statisticCard.slice(1, 3).map((item, i) => (
-          <div key={i}
+          <button key={i}
+
+            onClick={() => handleChange(item.title)}
             className="group flex flex-col sm:flex-row gap-2 md:gap-16 items-center text-[19px] sm:text-2xl font-semibold text-[#2F508C] shadow-[0px_2px_8px_rgba(99,99,99,0.2)] w-full p-8 rounded-[8px]"
           >
             <img src={item.img} alt="" 
               className="w-[90px] h-[90px] transition-all duration-[800ms] group-hover:scale-[1.1]"
             />
             <p className="text-center">{item.title} bo'lish</p>
-          </div>
+          </button>
         ))}
       </div>
     </div>
