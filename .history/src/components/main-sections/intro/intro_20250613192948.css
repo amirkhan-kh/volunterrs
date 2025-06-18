@@ -1,0 +1,43 @@
+.custom-slide {
+  transform: scale(0.9);
+  opacity: 0.8;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.slick-center .custom-slide {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.custom-dots {
+  position: absolute;
+  bottom: -35px;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  gap: 51px;
+  padding: 0;
+  margin: 0 auto;
+  list-style: none;
+  background: #000;
+}
+
+.custom-dot-wrapper {
+  width: 80px;
+  height: 5px;
+}
+
+.custom-dot {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  background-color: #cbd5e1; 
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.custom-dot.active {
+  background-color: #6495ED; 
+}
+@media screen {
+  
+}

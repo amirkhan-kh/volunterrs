@@ -15,7 +15,6 @@ function LocationSelector({ onSelect }: LocationSelectorProps) {
       const latlng = e.latlng
       setPosition(latlng)
 
-      // 🛰 Reverse geocode so‘rovi (Nominatim)
       try {
         const response = await fetch(
           `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latlng.lat}&lon=${latlng.lng}`

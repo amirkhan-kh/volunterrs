@@ -22,6 +22,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { LeafletMap } from "@/components/ui-elements/google-map";
+import { DatePickerForm } from "@/components/ui-elements/date-picker";
 
 const ProfileVolunterrEdit: React.FC = () => {
   const [address, setAddress] = useState("");
@@ -53,20 +54,20 @@ const ProfileVolunterrEdit: React.FC = () => {
     (1950 + i).toString()
   );
   return (
-    <div className="px-20 py-10">
+    <div className="px-2 sm:px-20 py-10 w-full">
       <div className="flex items-center justify-between ">
         <Button className="bg-transparent hover:bg-[#6494ed20] border border-[#6495ED]">
           <IoIosArrowBack color="#6495ED" />
         </Button>
-        <p className="text-[30px] font-semibold leading-[0.5px] tracking-[0.5px]">
+        <p className="text-[18px] sm:text-[30px] font-semibold leading-[0.5px] tracking-[0.5px] text-[#2F2E2E]">
           Profilni to’liq toldirish
         </p>
         <span></span>
       </div>
-      <div className="flex flex-col items-center justify-center py-14">
-        <div className=" w-[530px]">
+      <div className="flex flex-col items-center justify-center py-14 px-3">
+        <div className="">
           <div className="">
-            <Avatar className="w-80 h-80 mx-auto">
+            <Avatar className="w-60 sm:w-80 h-60 sm:h-80 mx-auto">
               <AvatarImage src="https://github.com/shadcn.png" />
             </Avatar>
             <Dialog>
@@ -85,20 +86,20 @@ const ProfileVolunterrEdit: React.FC = () => {
               </DialogContent>
             </Dialog>
           </div>
-          <form>
-            <p>Ism</p>
+          <form className=" px-6 w-[310px] sm:w-[530px]">
+            <p className="text-[#2F508C] text-[16px] font-semibold">Ism</p>
             <Input className="border border-[#6495ED] focus:outline-none  rounded-[6px] py-3 px-5 mb-7" />
-            <p>Familiya</p>
+            <p className="text-[#2F508C] text-[16px] font-semibold">Familiya</p>
             <Input className="border border-[#6495ED] focus:outline-none rounded-[6px] py-3 px-5 mb-7" />
-            <p>Telefon raqam</p>
+            <p className="text-[#2F508C] text-[16px] font-semibold">Telefon raqam</p>
             <Input className="border border-[#6495ED] focus:outline-none rounded-[6px] py-3 px-5 mb-4" />
             <div className="flex items-center gap-2">
               <input type="checkbox" />
-              <p>Bu ma’lumot boshqa foydalanuvchiga ko’rinmaydi</p>
+              <p className="text-[#2F2E2E] text-[14px] w-full font-normal">Bu ma’lumot boshqa foydalanuvchiga ko’rinmaydi</p>
             </div>
             <div className="py-10 flex flex-col gap-2">
-              <p>Tug’ilgan sana</p>
-              <div className="flex items-center gap-4">
+              <p className="hidden sm:block font-semibold text-[#2F508C] text-[16px]">Tug’ilgan sana</p>
+              <div className="hidden sm:flex items-center gap-4">
                 <Select>
                   <SelectTrigger className="w-[160px] h-10 flex items-center justify-between border border-[#6495ED] focus:outline-none rounded-[6px] py-3 px-5">
                     <SelectValue placeholder="Oy tanlang" />
@@ -138,25 +139,35 @@ const ProfileVolunterrEdit: React.FC = () => {
                   </SelectContent>
                 </Select>
               </div>
+              <div className="block sm:hidden">
+                <DatePickerForm/>
+              </div>
               <div className="flex items-center gap-2">
                 <input type="checkbox" />
-                <p>Bu ma’lumot boshqa foydalanuvchiga ko’rinmaydi</p>
+                <p className="text-[#2F2E2E] text-[14px] w-full font-normal">Bu ma’lumot boshqa foydalanuvchiga ko’rinmaydi</p>
               </div>
             </div>
-            <p>Elektron pochta</p>
-            <Input className="border border-[#6495ED] focus:outline-none rounded-[6px] py-3 px-5 mb-7" />
-            <p>Ish yoki o’qish joyi</p>
-            <Input className="border border-[#6495ED] focus:outline-none rounded-[6px] py-3 px-5 mb-4" />
+            <p className="text-[#2F508C] text-[16px] font-semibold">Elektron pochta</p>
+            <Input
+            placeholder="johndo123@gmail.com"
+            className="border border-[#6495ED] focus:outline-none rounded-[6px] py-3 px-5 mb-7" />
+            <p className="text-[#2F508C] text-[16px] font-semibold">Ish yoki o’qish joyi</p>
+            <Input
+            placeholder="Korxona nomi yoki Ta’lim muassasasi"
+            className="border border-[#6495ED] focus:outline-none rounded-[6px] py-3 px-5 mb-4" />
             <div className="flex items-center gap-2 mb-3">
               <input type="checkbox" />
-              <p>Bu ma’lumot boshqa foydalanuvchiga ko’rinmaydi</p>
+              <p className="text-[#2F2E2E] text-[14px] w-full font-normal">Bu ma’lumot boshqa foydalanuvchiga ko’rinmaydi</p>
             </div>
 
-            <p>Passport seriasi</p>
-            <Input className="border border-[#6495ED] focus:outline-none rounded-[6px] py-3 px-5 mb-7" />
-            <p>Yashash manzil</p>
+            <p className="text-[#2F508C] text-[16px] font-semibold">Passport seriasi</p>
+            <Input
+            placeholder="AA1234567"
+            className="border border-[#6495ED] focus:outline-none rounded-[6px] py-3 px-5 mb-7" />
+            <p className="text-[#2F508C] text-[16px] font-semibold">Yashash manzil</p>
             <div className="flex items-center gap-2 mb-4">
               <Input
+                placeholder="Toshkent shahri"
                 className="border border-[#6495ED] focus:outline-none rounded-[6px] py-3 px-5"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
@@ -168,7 +179,7 @@ const ProfileVolunterrEdit: React.FC = () => {
                 </DialogTrigger>
                 <DialogContent>
                   <DialogHeader>
-                    <DialogTitle>Manzilni tanlang</DialogTitle>
+                    <DialogTitle className="text-[#2F508C] text-[16px] font-bold">Manzilni tanlang</DialogTitle>
                   </DialogHeader>
                   <LeafletMap onSelect={handleLocationSelect} />
                 </DialogContent>
@@ -176,12 +187,12 @@ const ProfileVolunterrEdit: React.FC = () => {
             </div>
             <div className="flex items-center gap-2 mb-10">
               <input type="checkbox" />
-              <p>Bu ma’lumot boshqa foydalanuvchiga ko’rinmaydi</p>
+              <p className="text-[#2F2E2E] text-[14px] w-full font-normal">Bu ma’lumot boshqa foydalanuvchiga ko’rinmaydi</p>
             </div>
-            <div className="w-80 flex flex-col gap-4 mb-20">
-              <p>Ijtimoiy tarmoqlar</p>
-              <div className="flex items-center gap-4">
-                <Avatar className="w-10 h-10">
+            <div className="w-64 sm:w-80 flex flex-col gap-4 mb-20">
+              <p className="text-[#2F508C] text-[16px] font-smibold">Ijtimoiy tarmoqlar</p>
+              <div className="flex items-center gap-2 sm:gap-4">
+                <Avatar className="w-7 sm:w-10 h-7 sm:h-10">
                   <AvatarImage src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" />
                 </Avatar>
                 <Input
@@ -189,8 +200,8 @@ const ProfileVolunterrEdit: React.FC = () => {
                   placeholder="Telegram havola"
                 />
               </div>
-              <div className="flex items-center gap-4">
-                <Avatar className="w-10 h-10 rounded-full">
+              <div className="flex items-center gap-2 sm:gap-4">
+                <Avatar className="w-7 sm:w-10 h-7 sm:h-10 rounded-full">
                   <AvatarImage src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" />
                 </Avatar>
                 <Input
@@ -199,8 +210,8 @@ const ProfileVolunterrEdit: React.FC = () => {
                 />
               </div>
 
-              <div className="flex items-center gap-4">
-                <Avatar className="w-10 h-10">
+              <div className="flex items-center gap-2 sm:gap-4">
+                <Avatar className="w-7 sm:w-10 h-7 sm:h-10">
                   <AvatarImage src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" />
                 </Avatar>
                 <Input
