@@ -5,15 +5,17 @@ import "./_style.scss";
 import { bankApps, priceBtn } from "@/db/org-btns";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
 const HomeOrganization: React.FC = () => {
+  const {t} = useTranslation("HomeVolandOrgLang");
   return (
-    <div className="">
+    <div className=" ">
       <div className="bg-white py-14">
         <div className="container mx-auto px-3 lg:px-[100px]">
           <div className="hidden sm:flex gap-8 w-full">
             <div className="w-[50%]">
               <h3 className="text-3xl font-semibold  mb-4">
-                Volontyor va tashkilot
+               {t("title")}
               </h3>
               <div className=" overflow-hidden h-[490px] rounded-[12px] mb-4">
                 <img
@@ -33,9 +35,7 @@ const HomeOrganization: React.FC = () => {
                 />
               </div>
               <h3 className="text-[18px] font-medium leading-7">
-                Dunyoni ezgulik tomonlarini izlayotgan Volontyorlar va xayirli
-                ishlarni qilmoqchi bo'lgan barcha tashkilotlar birlashgan
-                yaxshilik maydoniga hush kelibsiz!
+                {t("subtitle")}
               </h3>
             </div>
           </div>
@@ -71,7 +71,7 @@ const HomeOrganization: React.FC = () => {
             ))}
           </div>
           <Button className=" bg-[#6495ED] hover:bg-[#6494edea] w-full rounded-[12px] h-12 text-2xl font-medium">
-            Pul o’tkazish
+            {t("pay")}
           </Button>
         </div>
       </div>

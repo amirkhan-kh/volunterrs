@@ -1,15 +1,14 @@
 #byUser {
     width: 100vw;
     height: 100vh;
-    overflow: hidden;
     .byUserImg {
         background-image: url("/voluntermedia/volunter-images/byuserBg.png");
         width: 100vw;
         height: 100vh;
         background-repeat: no-repeat, no-repeat;
         background-size:
-            100% 100%,
-            100% 100%;
+            100vw 100vh,
+            100vw 100vh;
         background-position:
             bottom left,
             bottom left;

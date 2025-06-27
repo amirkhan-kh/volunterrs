@@ -1,11 +1,23 @@
 import axios from 'axios';
+// authApi.ts token bilan so'rovlar uchun ishlatiladi
+
+
+
+
+
+
+
+
 
 export const authApi = axios.create({
-  baseURL: 'http://localhost:8000/user/',
+  baseURL: 'http://localhost:8000/user/v2/',
   headers: {
     'Content-Type': 'application/json',
   },
 });
+
+
+
 
 authApi.interceptors.request.use(
   (config) => {
@@ -18,10 +30,13 @@ authApi.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// noAuthApi.ts
+// noAuthApi.ts tokensiz so'rovlar uchun ishlatiladi
+
+
+
 
 export const noAuthApi = axios.create({
-  baseURL: 'http://localhost:8000/user/',
+  baseURL: 'http://localhost:8000/user/v2/',
   headers: {
     'Content-Type': 'application/json',
   },

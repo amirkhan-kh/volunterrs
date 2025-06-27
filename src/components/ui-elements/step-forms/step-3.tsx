@@ -1,187 +1,208 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Lottie from "lottie-react";
 import { useForm } from "react-hook-form";
 import logo from "../../../../public/voluntermedia/Logo.png";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FormControl,  FormField,  FormItem, FormLabel, FormMessage, Form} from "@/components/ui/form";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  Form,
+} from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import phoneAnime from "../../../../public/voluntermedia/animation/Animation - 1747684791916.json";
-import phoneAnimeGreen from '../../../../public/voluntermedia/animation/greenstep3.json'
+import phoneAnimeGreen from "../../../../public/voluntermedia/animation/greenstep3.json";
 import { z } from "zod";
 import { LuLocateFixed } from "react-icons/lu";
-import './_style.scss'
+import "./_style.scss";
 import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from "@/store/store-config";
+import type { RootState, AppDispatch } from "@/store/store-config";
 import { setRole } from "@/store/role-slice";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { FaLocationCrosshairs } from "react-icons/fa6";
+import { LeafletMap } from "../google-map";
+import { registerVolunteer } from "@/store/volunter-post";
+import { useNavigate } from "react-router";
+import { toast, Toaster } from "sonner";
 
-export type FormData = z.infer<typeof formSchema3>;
-const formSchema3 = z.object({
-  firstName: z
-    .string()
-    .min(2, { message: "Ism kamida 2 ta harfdan iborat bo‘lishi kerak" }),
-  surname: z
-    .string()
-    .min(2, { message: "Familiya kamida 2 ta harfdan iborat bo‘lishi kerak" }),
-  password: z
-    .string()
-    .min(6, { message: "Parol kamida 6 belgidan iborat bo‘lishi kerak" }),
-  birthday: z.string().min(1, { message: "Tug‘ilgan sanani tanlang" }),
-  address: z.string().min(1, { message: "Manzil bo‘sh bo‘lishi mumkin emas" }),
-  gender: z.enum(["male", "female"], { required_error: "Jinsni tanlang" }),
-  agree: z.boolean().refine((val) => val === true, {
-    message: "Foydalanuvchi shartlariga rozilik kerak",
-  }),
-});
+const formSchema = z
+  .object({
+    phone_number: z.string().min(7, "Telefon raqam noto‘g‘ri"),
+    password: z.string()
+      .min(8, "Parol kamida 8 ta belgidan iborat bo‘lishi kerak")
+      .refine(val => isNaN(Number(val)), {
+        message: "Faqat raqamlardan iborat parol bo‘lmasligi kerak",
+      }),
+
+    confirm_password: z.string().min(6, "Parolni qayta kiriting"),
+    name: z.string().min(2, "Ismingizni kiriting"),
+    surname: z.string().min(2, "Familiyangizni kiriting"),
+    date_of_birth: z.string().min(1, "Tug‘ilgan sana kerak"),
+    address: z.string().min(1, "Manzil bo‘sh bo‘lmasligi kerak"),
+    gender: z.enum(["M", "F"], { required_error: "Jinsni tanlang" }),
+  })
+  .refine((data) => data.password === data.confirm_password, {
+    message: "Parollar mos emas",
+    path: ["confirm_password"],
+  });
+
+type FormSchemaType = z.infer<typeof formSchema>;
+
 export const Step3: React.FC = () => {
+  const [address, setAddress] = useState("");
+  console.log("Address:", address);
+
+  const dispatch = useDispatch<AppDispatch>();
   const role = useSelector((state: RootState) => state.role.role);
-  const dispatch = useDispatch();
-  const form3 = useForm<z.infer<typeof formSchema3>>({
-    resolver: zodResolver(formSchema3),
+
+  const form = useForm<FormSchemaType>({
+    resolver: zodResolver(formSchema),
     defaultValues: {
-      firstName: "",
-      surname: "",
+      name: "",
+      phone_number: "",
       password: "",
-      birthday: "",
+      confirm_password: "",
+      surname: "",
+      date_of_birth: "",
       address: "",
       gender: undefined,
-      agree: true,
     },
   });
-  function onSubmit3(values: z.infer<typeof formSchema3>) {
-    console.log(values);
-  }
 
+  const verified = useSelector((state: RootState) => state.verify.verified);
+  console.log("Verified status:", verified);
+
+  const onSubmit = (values: FormSchemaType) => {
+    if (!verified) {
+      alert("Iltimos, telefon raqamingizni SMS orqali tasdiqlang.");
+      return;
+    }
+
+    dispatch(registerVolunteer(values));
+    console.log("Form submitted with values:", values);
+  };
 
   useEffect(() => {
-      const storedRole = localStorage.getItem("role") as
-        | "volunterr"
-        | "investor"
-        | null;
-      if (storedRole && !role) {
-        dispatch(setRole(storedRole));
-      }
-    }, [dispatch, role]);
+    const storedRole = localStorage.getItem("role") as "volunterr" | "investor" | null;
+    if (storedRole && !role) dispatch(setRole(storedRole));
+  }, [dispatch, role]);
 
-  const ganerateAnime = role === "investor" ? phoneAnimeGreen : phoneAnime
+  const animation = role === "investor" ? phoneAnimeGreen : phoneAnime;
+
+  const handleLocationSelect = (selectedAddress: string) => {
+    setAddress(selectedAddress);
+    form.setValue("address", selectedAddress);
+  };
+
+
+  const navigate = useNavigate();
+const success = useSelector((state: RootState) => state.postVolunterr.success);
+console.log("Registration success status:", success);
+
+useEffect(() => {
+  if (success) {
+    navigate('/login'); // yoki boshqa sahifa
+  } else{
+      toast.error("Tasdiqlash kodingiz noto‘g‘ri!")
+  }
+}, [success, navigate]);
+console.log(localStorage.getItem('token'));
+
   return (
-    <div className="container mx-auto h-screen flex flex-col justify-center p-20 gap-8">
+    <>
+    <Toaster position="top-right" richColors />
+    <div className="container mx-auto h-screen flex flex-col justify-center p-5 lg:p-20 gap-8">
       <div className="flex w-full">
-        <img src={logo} alt="Logo Oltin qanot" className="w-[100px]" />
-        <span></span>
+        <img src={logo} alt="Logo Oltin qanot" className="w-[100px] hidden lg:block" />
       </div>
-      <div className="flex items-center justify-between translate-y-[-40px]">
-        <div id="step3" className="p-0">
-          <Lottie
-            animationData={ganerateAnime}
-            loop
-            autoplay
-            style={{ height: "500px", width: "360px" }}
-          />
+
+      <div className="flex items-center justify-center lg:justify-between">
+        <div className="hidden lg:block">
+          <Lottie animationData={animation} loop autoplay style={{ height: 500, width: 360 }} />
         </div>
-        <div className="backdrop-blur-md bg-[rgba(255,255,255,0.7)] shadow w-[500px] rounded-[12px] py-7 px-4">
-          <Form {...form3}>
-            <form
-              onSubmit={form3.handleSubmit(onSubmit3)}
-              className="space-y-4"
-            >
+
+        <div className="backdrop-blur-md bg-white/70 shadow w-[500px] rounded-xl p-7">
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <p className="text-center font-semibold text-[28px]">Ro’yxatdan o’tish</p>
-              {/* Ism */}
-              <FormField<FormData>
-                control={form3.control}
-                name="firstName"
+
+              {(["name", "surname", "phone_number"] as const).map((fieldName) => (
+                <FormField
+                key={fieldName}
+                control={form.control}
+                name={fieldName}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-[#2F508C] font-semibold text-[14px] leading-1">
-                      Ismingizni kiriting
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        type="text"
-                        placeholder="Kiriting"
-                        {...field}
-                        value={typeof field.value === "string" ? field.value : ""} 
-                        className="border border-[#808080CC] py-2.5 px-4 rounded-[6px] mb-2"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              {/* Familiya */}
-              <FormField<FormData>
-                control={form3.control}
-                name="surname"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-[#2F508C] font-semibold text-[14px] leading-1">
-                      Familiyangiz kiriting
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="Kiriting"
-                        {...field}
-                        value={typeof field.value === "string" ? field.value : ""} 
-                        className="border border-[#808080CC] py-2.5 px-4 rounded-[6px] mb-2"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              {/* Parol */}
-              <FormField<FormData>
-                control={form3.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-[#2F508C] font-semibold text-[14px] leading-1">
-                      Parol kiriting
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        type="password"
-                        placeholder="Kiriting"
-                        {...field}
-                        value={typeof field.value === "string" ? field.value : ""} 
-                        className="border border-[#808080CC] py-2.5 px-4 rounded-[6px] mb-2"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              {/* Tug‘ilgan sana */}
-              <div className="flex items-center gap-7 w-full mb-5">
-                <FormField<FormData>
-                  control={form3.control}
-                  name="birthday"
-                  render={({ field }) => (
-                    <FormItem className="w-[50%]">
-                      <FormLabel className="text-[#2F508C] font-semibold text-[14px] leading-1">
-                        Tug‘ilgan sanangizni kiriting
+                      <FormLabel>
+                        {fieldName === "name"
+                          ? "Ism"
+                          : fieldName === "surname"
+                          ? "Familiya"
+                          : "Telefon raqam"}
                       </FormLabel>
                       <FormControl>
-                        <Input
-                          type="date"
-                          {...field}
-                          value={typeof field.value === "string" ? field.value : ""} 
-                          className="border border-[#808080CC] py-2.5 px-4 rounded-[6px]"
-                        />
+                        <Input placeholder="Kiriting" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
-                />
-                {/* Manzil */}
-                <FormField<FormData>
-                  control={form3.control}
+                  />
+              ))}
+
+              <div className="flex gap-3">
+                {(["password", "confirm_password"] as const).map((fieldName) => (
+                  <FormField
+                  key={fieldName}
+                  control={form.control}
+                  name={fieldName}
+                  render={({ field }) => (
+                    <FormItem className="w-1/2">
+                        <FormLabel>
+                          {fieldName === "password"
+                            ? "Parol"
+                            : "Parolni tasdiqlang"}
+                        </FormLabel>
+                        <FormControl>
+                          <Input type="password" placeholder="*******" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                    />
+                  ))}
+              </div>
+
+              <div className="flex gap-3">
+                <FormField
+                  control={form.control}
+                  name="date_of_birth"
+                  render={({ field }) => (
+                    <FormItem className="w-1/2">
+                      <FormLabel>Tug‘ilgan sana</FormLabel>
+                      <FormControl>
+                        <Input type="date" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                  />
+
+                <FormField
+                  control={form.control}
                   name="address"
                   render={({ field }) => (
-                    <FormItem className="w-[50%]">
-                      <FormLabel className="text-[#2F508C] font-semibold text-[14px] leading-1">
-                        Manzilingizni kiriting
-                      </FormLabel>
+                    <FormItem className="w-1/2">
+                      <FormLabel>Manzil</FormLabel>
                       <FormControl>
                         <div className="flex gap-2">
                           <Input
@@ -199,83 +220,65 @@ export const Step3: React.FC = () => {
                             <LuLocateFixed color="#808080CC"/>
 
                           </Button>
+                          <Input {...field} />
+                          <Dialog>
+                            <DialogTrigger className="p-2 border rounded">
+                              <FaLocationCrosshairs />
+                            </DialogTrigger>
+                            <DialogContent>
+                              <DialogHeader>
+                                <DialogTitle>
+                                  <LuLocateFixed /> Manzilni tanlang
+                                </DialogTitle>
+                                <DialogDescription>
+                                  Xarita orqali kerakli manzilni tanlang va "Saqlash" tugmasini bosing.
+                                </DialogDescription>
+                              </DialogHeader>
+                              <LeafletMap onSelect={handleLocationSelect} />
+                            </DialogContent>
+                          </Dialog>
                         </div>
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
-                />
+                  />
               </div>
-              {/* Jins */}
-              <FormField<FormData>
-                control={form3.control}
+
+              <FormField
+                control={form.control}
                 name="gender"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-[#2F508C] font-semibold text-[14px]">
-                      Jinsingizni tanlang
-                    </FormLabel>
+                    <FormLabel>Jins</FormLabel>
                     <FormControl>
-                      <div className="flex gap-4">
-                        <label className="flex items-center space-x-2">
-                          <input
-                            type="radio"
-                            value="male"
-                            checked={field.value === "male"}
-                            onChange={() => field.onChange("male")}
-                            className="accent-[#6495ED]"
-                          />
-                          <span className="text-[#2F508C] font-semibold text-[13px]">
-                            Erkak
-                          </span>
-                        </label>
-                        <label className="flex items-center space-x-2">
-                          <input
-                            type="radio"
-                            value="female"
-                            checked={field.value === "female"}
-                            onChange={() => field.onChange("female")}
-                            className="accent-[#6495ED]"
-                          />
-                          <span className="text-[#2F508C] font-semibold text-[13px]">
-                            Ayol
-                          </span>
-                        </label>
+                      <div className="flex gap-5">
+                        {[
+                          { label: "Erkak", value: "M" },
+                          { label: "Ayol", value: "F" },
+                        ].map(({ label, value }) => (
+                          <label key={value} className="flex items-center gap-2">
+                            <input
+                              type="radio"
+                              value={value}
+                              checked={field.value === value}
+                              onChange={() => field.onChange(value)}
+                              className="accent-[#6495ED]"
+                            />
+                            {label}
+                          </label>
+                        ))}
                       </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
-              />
-              {/* Foydalanuvchi shartlariga rozilik */}
-              <FormField<FormData>
-                control={form3.control}
-                name="agree"
-                render={({ field }) => (
-                  <FormItem>
-                    <div className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        id="agree"
-                        checked={!!field.value}
-                        onChange={field.onChange}
-                      />
-                      <label htmlFor="agree" className="text-sm">
-                        Foydalanuvchi shartlariga roziman
-                      </label>
-                    </div>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              {/* Submit button */}
-              <Button
-                type="submit"
-                className="w-full text-[18px] font-semibold py-4 bg-[#6495ED] hover:bg-[#6494eded]"
-              >
+                />
+
+              <Button type="submit" className="w-full py-4 text-lg font-semibold bg-[#6495ED]">
                 Ro'yxatdan o'tish
               </Button>
-              {/* Pastdagi log in link */}
+
               <p className="text-center text-sm">
                 Akkountingiz bormi?{" "}
                 <a href="/login" className="text-blue-600 underline">
@@ -287,5 +290,6 @@ export const Step3: React.FC = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };

@@ -2,8 +2,11 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import NavDropdaownAbout, { NavDropdaownVolunterrs } from '../nav-dropdawn'
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md'
+import { useTranslation } from 'react-i18next';
 
 export const BottomNavbar: React.FC = () => {
+    const { t } = useTranslation("Header");
+  
   return (
       <ul className="flex items-center justify-center gap-3 ">
         <NavLink
@@ -13,7 +16,7 @@ export const BottomNavbar: React.FC = () => {
           }
         >
           <li className="text-[15px] font-semibold leading-[24px]">
-            Bosh Sahifa
+           {t("nav1")}
           </li>
         </NavLink>
 
@@ -30,7 +33,7 @@ export const BottomNavbar: React.FC = () => {
           }
         >
           <li className="text-[15px] font-semibold leading-[24px] ">
-            Tadbirlar
+           {t("nav3")}
           </li>
         </NavLink>
 
@@ -41,7 +44,7 @@ export const BottomNavbar: React.FC = () => {
           }
         >
           <li className="text-[15px] font-semibold leading-[24px] ">
-            Yangiliklar
+           {t("nav4")}
           </li>
         </NavLink>
 

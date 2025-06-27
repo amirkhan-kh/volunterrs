@@ -1,15 +1,16 @@
-import { Outlet } from "react-router"
+import { Outlet, useLocation } from "react-router-dom"
 import { Footer, Header } from "./components"
 import './index.css'
 function App() {
-
+ const location = useLocation();
+  const hideFooterOnPaths = ["/profile-volunter"];
   return (
     <div className=''>
       <Header/>
       <main className="min-h-screen">
         <Outlet/>
       </main>
-      <Footer/>
+      {!hideFooterOnPaths.includes(location.pathname) && <Footer />}
     </div>
   )
 }

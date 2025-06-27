@@ -20,25 +20,29 @@ export const priceBtn = [
 ]
 
 import payme from '../../public/voluntermedia/icons/homeIcon/payme.png';
-import oson from '../../public/voluntermedia/icons/homeIcon/oson.png';
-import qiwi from '../../public/voluntermedia/icons/homeIcon/qiwi.png';
+import uzum from '../../public/voluntermedia/icons/homeIcon/UZUM_BANK-01-removebg-preview.png';
+import paynet from '../../public/voluntermedia/icons/homeIcon/paynet-removebg-preview.png';
 import click from '../../public/voluntermedia/icons/homeIcon/click.png';
 
 export const bankApps = [
     {
         img: payme,
+         value: "payme",
 
     },
     {
-        img: oson,
+        img: uzum,
+         value: "uzum",
 
     },
     {
-        img: qiwi,
+        img: paynet,
+         value: "paynet",
 
     },
     {
         img: click,
+         value: "click",
 
     },
 ]

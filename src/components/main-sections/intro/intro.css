@@ -3,6 +3,13 @@
   opacity: 0.8;
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
+.responsive-img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  aspect-ratio: 16 / 9; /* yoki 3 / 2, yoki rasm nisbati */
+  border-radius: 12px;
+}
 
 .slick-center .custom-slide {
   transform: scale(1);

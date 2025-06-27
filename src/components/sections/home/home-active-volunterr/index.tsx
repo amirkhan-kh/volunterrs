@@ -12,8 +12,11 @@ import active8 from '../../../../../public/voluntermedia/icons/homeIcon/activ7.p
 import active9 from '../../../../../public/images/activ9.png';
 import active10 from '../../../../../public/images/activ10.png'
 import "./_style.scss";
+import { useTranslation } from "react-i18next";
 const HomeActiveVolunterr: React.FC = () => {
     const location = useLocation();
+      const {t} = useTranslation("HomeActiveVolunterrLang");
+    
 
   return (
     <div id="home-active" className="bg-white">
@@ -21,17 +24,20 @@ const HomeActiveVolunterr: React.FC = () => {
         <div className="flex items-center justify-between mb-8 ">
           <h2 className="text-[22px] sm:text-3xl font-semibold leading-8 ">
             {location.pathname.replace(/\/$/, "") === "/rasmlar"
-            ? "Volontyor va tashkilot"
-            : "Faol Volontyorlar"}
+            ? `${t("title")}`
+            : `${t("title")}`
+            }
           </h2>
           <NavLink to="/volunterrs-page">
             <li className="list-none text-[18px] font-semibold leading-[24px] text-[#6495ED] flex items-center">
-              <span>hammasi</span>
+              <span>
+                {t("seeAll")}
+              </span>
               <MdKeyboardArrowRight size={24} />
             </li>
           </NavLink>
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col ">
           <div className="flex w-full">
             <div className="w-[60%]">
               <img src={active1} alt="" className="translate-y-[6px] sm:translate-y-[0px] rounded-2xl sm:w-[400px] md:w-[100%]"/>
