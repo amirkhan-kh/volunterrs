@@ -194,7 +194,7 @@ export const Step3: React.FC = () => {
                             type="button"
                             variant="ghost"
                             className="border border-[#808080CC] "
-                              // onClick={() => setOpenMapModal(true)}
+                            //   onClick={() => setOpenMapModal(true)}
                           >
                             <LuLocateFixed color="#808080CC"/>
 
