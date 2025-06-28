@@ -26,10 +26,10 @@ const IntroVolunterr: React.FC = () => {
     if (!video) return;
     if (video.paused) {
       video.play();
-       setIsPlaying(true);
+      setIsPlaying(true);
     } else {
       video.pause();
-       setIsPlaying(false);
+      setIsPlaying(false);
     }
   };
 
@@ -67,55 +67,58 @@ const IntroVolunterr: React.FC = () => {
 
   return (
     <>
-      <div id="aboutIntro" className="px-4 py-20 lg:py-10 ">
-        <div className="container mx-auto px-0 lg:px-[60px]">
-          <h2 className="text-4xl mb-8">{t("title")}</h2>
+      <div id="aboutIntro" className="px-4 py-5 md:py-20 lg:py-10 ">
+        <div className="container mx-auto px-3 lg:px-[60px]">
+          <h2 className="text-[18px] md:text-4xl mb-2 md:mb-8">{t("title")}</h2>
           <div className="mx-auto relative ">
-            <video
-              ref={mainVideoRef}
-              onTimeUpdate={() => handleTimeUpdate(mainVideoRef.current)}
-              className="w-full h-[500px] rounded-lg object-contain aspect-video"
-            >
-              <source src="/videos/video_2020-09-12_16-03-13.mp4" type="video/mp4" />
-            </video>
+            <div>
 
-            <span className="absolute top-48 left-[600px]">
-              <button
-                onClick={() => handlePlayPause(mainVideoRef.current)}
-                className="text-3xl text-white border-2 border-white rounded-full p-2"
+              <video
+                ref={mainVideoRef}
+                onTimeUpdate={() => handleTimeUpdate(mainVideoRef.current)}
+                className="w-full h-[500px] rounded-lg object-contain aspect-video"
               >
-                {isPlaying ? <IoPauseOutline /> : <IoPlayOutline />}
+                <source src="/videos/video_2020-09-12_16-03-13.mp4" type="video/mp4" />
+              </video>
 
-              </button>
-            </span>
-
-            <div className="w-full absolute px-50">
-               <div className="flex items-center justify-between">
-                <span className="text-white">{currentTime}</span>
-                <span className="text-white">{totalTime}</span>
-              </div>
-              <input
-                type="range"
-                min={0}
-                max={100}
-                value={value}
-                onChange={(e) => handleRangeChange(e, mainVideoRef.current)}
-                className="w-full custom-range"
-                style={{ "--value": `${value}%` } as React.CSSProperties}
-              />
-              <div className="flex items-center justify-between">
+              <span className="absolute top-48  lg:left-[600px]  hidden xl:block  ">
                 <button
-                  className="text-3xl text-white"
                   onClick={() => handlePlayPause(mainVideoRef.current)}
+                  className="text-3xl text-white border-2 border-white rounded-full p-2"
                 >
-                 {isPlaying ? <IoPauseOutline /> : <IoPlayOutline />}
+                  {isPlaying ? <IoPauseOutline /> : <IoPlayOutline />}
+
                 </button>
-                <button
-                  onClick={openModal}
-                  className="text-white text-3xl"
-                >
-                  <RxExitFullScreen />
-                </button>
+              </span>
+
+              <div className="w-full absolute px-2 lg:px-50 bottom-20 sm:bottom-30 md:bottom-0">
+                <div className="flex items-center justify-between ">
+                  <span className="text-white">{currentTime}</span>
+                  <span className="text-white">{totalTime}</span>
+                </div>
+                <input
+                  type="range"
+                  min={0}
+                  max={100}
+                  value={value}
+                  onChange={(e) => handleRangeChange(e, mainVideoRef.current)}
+                  className="w-full custom-range"
+                  style={{ "--value": `${value}%` } as React.CSSProperties}
+                />
+                <div className="flex items-center justify-between">
+                  <button
+                    className="text-3xl text-white"
+                    onClick={() => handlePlayPause(mainVideoRef.current)}
+                  >
+                    {isPlaying ? <IoPauseOutline /> : <IoPlayOutline />}
+                  </button>
+                  <button
+                    onClick={openModal}
+                    className="text-white text-3xl"
+                  >
+                    <RxExitFullScreen />
+                  </button>
+                </div>
               </div>
             </div>
           </div>

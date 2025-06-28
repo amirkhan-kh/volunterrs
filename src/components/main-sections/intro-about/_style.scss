@@ -5,6 +5,9 @@
   background-repeat: no-repeat;
   background-size: 100%;
   background-position: bottom;
+   @media (max-width: 639px) {
+    height: 500px;
+  }
 
   .custom-range {
     -webkit-appearance: none;
