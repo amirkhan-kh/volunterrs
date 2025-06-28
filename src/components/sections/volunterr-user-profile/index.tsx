@@ -9,7 +9,6 @@ import {
 import { IoLocationOutline } from "react-icons/io5";
 
 import { TbEdit } from "react-icons/tb";
-import { Button } from "@/components/ui/button";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "@/store/store-config";
 import { fetchUser } from "@/store/gets/get-me";
@@ -20,17 +19,18 @@ const VolunterUserProfile: React.FC = () => {
   const { profile, loading, error } = useSelector((state: RootState) => state.userMe);
   console.log("profile", profile);
   const role = useSelector((state: RootState) => state.role.role);
-  console.log(role);
   useEffect(() => {
     dispatch(fetchUser());
     const storedRole = localStorage.getItem("role") as
-      | "volunterr"
-      | "investor"
-      | null;
+    | "volunterr"
+    | "investor"
+    | null;
     if (storedRole && !role) {
       dispatch(setRole(storedRole));
     }
   }, [dispatch]);
+  console.log(profile);
+  console.log(role);
 
   if (loading) return <div>Yuklanmoqda...</div>;
   if (error) return <div>Xato: {error}</div>;
@@ -38,12 +38,11 @@ const VolunterUserProfile: React.FC = () => {
 
 
 
-  console.log(role);
 
   return (
     <div id="byUser" className="overflow-x-hidden">
       <div className="byUserImg">
-        <div className="container mx-auto flex flex-col ]">
+        <div className="container mx-auto flex flex-col ">
 
           <div className="flex flex-col items-center justify-center py-7">
             <div className="">
@@ -66,9 +65,15 @@ const VolunterUserProfile: React.FC = () => {
                     <TbEdit size={30} color="silver" />
                   </DialogTrigger>
                   <h4 className="text-4xl font-medium">{profile?.name} </h4>
+                  <h4>{profile?.company_name}</h4>
                   <div className="flex items-center gap-2">
                     <p className="text-[18px]">
-                      {role === "volunterr" ? "Volunteer" : "Investor"}
+                      {role  !== "volunterr" ?(
+                        <span>Voluneer</span>
+                      ): (
+                        <span>Investor</span>
+                      )}
+
                     </p>
                     <span className="text-[13px] text-gray-500">{profile?.id}</span>
                   </div>
@@ -76,8 +81,8 @@ const VolunterUserProfile: React.FC = () => {
                   <div className="flex items-center justify-between">
                     <span></span>
                     <div className="flex items-center">
-                      <Button></Button>
-                      <Button></Button>
+                      {/* <Button></Button> */}
+                      {/* <Button></Button> */}
                     </div>
                   </div>
                 </div>
@@ -86,11 +91,11 @@ const VolunterUserProfile: React.FC = () => {
             </div>
 
 
-            <div className=" px-10 ">
+            <div className="px-2 md:px-10 ">
 
-              <div className=" bg-[#fff]  w-full p-6 rounded-md">
-                <div className="flex justify-between w-[1000px]">
-                  <div className="flex flex-col justify-between gap-4">
+              <div className=" bg-[#fff]  w-full p-6 rounded-md min-w-[300px] sm:min-w-[500px]">
+                <div className="flex flex-col  gap-4 sm:flex-row justify-between md:w-[600px] lg:w-[800px] xl:w-[1000px]">
+                  <div className="flex flex-col text-start justify-between gap-4">
                     <p className="text-gray-500">Telofon Raqam</p>
                     <span>+{profile?.user.phone_number}</span>
                     {profile?.email && (
@@ -99,22 +104,85 @@ const VolunterUserProfile: React.FC = () => {
                         <span>{profile.email}</span>
                       </div>
                     )}
+                    {profile?.passport_num && (
+                      <div>
+                        <p className="text-gray-500">Pasport Raqami</p>
+                        <span>{profile.passport_num}</span>
+                      </div>
+                    )}
+                    {profile?.company_name && (
+                      <div>
+                        <p className="text-gray-500">Kompaniya Nomi</p>
+                        <span>{profile.company_name}</span>
+                      </div>
+                    )}
+                    {profile?.inn && (
+                      <div>
+                        <p className="text-gray-500">INN</p>
+                        <span>{profile.inn}</span>
+                      </div>
+                    )}
+                     {profile?.gender && (
+                      <div>
+                        <p className="text-gray-500">Jins</p>
+                        {profile.gender === "M" ?(
+                          <span>Erkak</span>
+                        ): (
+                          <span>Ayol</span>
+                        )}
+                      </div>
+                    )}
                     <p></p>
                   </div>
-                  <div className="flex flex-col justify-between">
+                  <div className="flex flex-col  sm:justify-between">
                     {profile?.date_of_birth && (
                       <div>
                         <p className="text-gray-500">Tug'ilgan Sanasi</p>
                         <span>{profile.date_of_birth}</span>
                       </div>
                     )}
+                    {profile?.company_email && (
+                      <div>
+                        <p className="text-gray-500">Kompaniya Email</p>
+                        <span>{profile.company_email}</span>
+                      </div>
+                    )}
+                    {profile?.address && (
+                      <div>
+                        <p className="text-gray-500">Yashash Manzili</p>
+                        <span
+                          className="border border-blue-300 w-[200px] rounded-sm h-8 px-4 flex items-center justify-betw"
+                        >{profile?.address.substring(0, 10)}... <IoLocationOutline />
+                        </span>
+                      </div>
+                    )}
+                    {profile?.company_website && (
+                      <div>
+                        <p className="text-gray-500">Kompaniya Veb Sayti</p>
+                        <a href={profile.company_website}>
+
+                          <span>{profile.company_website}</span>
+                        </a>
+                      </div>
+                    )}
+                    {profile?.company_owner && (
+                      <div>
+                        <p className="text-gray-500">Kompaniya Egasi</p>
+                        <span>{profile.company_owner}</span>
+                      </div>
+                    )}
                    
-                    <p className="text-gray-500">Yashash Manzili</p>
-                    <span
-                      className="border border-blue-300 w-[200px] rounded-sm h-8 px-4 flex items-center justify-betw"
-                    >{profile?.address.substring(0, 15)}... <IoLocationOutline /></span>
                   </div>
-                  <div><UsageTimer /></div>
+                  <div className="flex flex-col items-center sm:justify-between">
+                    <UsageTimer />
+                    {profile?.passport_num && (
+                      <div>
+                        <p className="text-gray-500">Pasport Raqami</p>
+                        <span>{profile.passport_num}</span>
+                      </div>
+                    )}
+
+                  </div>
                 </div>
               </div>
 

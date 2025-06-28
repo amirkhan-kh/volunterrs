@@ -9,7 +9,7 @@ const HomeStatistica:React.FC = () => {
   const statisticCard = useStatisticCard()
   return (
     <div className='container mx-auto px-4 lg:px-[100px] py-10 flex flex-col gap-20'>
-      <div className="grid grid-cols-2 lg:grid-cols-4 w-full gap-3 md:gap-10">
+      <div className="grid grid-cols-2 lg:grid-cols-4 w-full gap-5 md:gap-10  lg:gap-12 xl: gap-2 ">
         {statisticCard.map((item, i) => (
           <div key={i} 
             className='group shadow-[0px_2px_8px_rgba(99,99,99,0.2)] hover:shadow-[0px_1px_5px_rgba(99,99,99,0.2)] hover:transition-all duration-[500ms] rounded-[8px] sm:w-[290px] md:w-[350px] lg:w-[240px] h-72 flex flex-col items-center py-7 gap-8'

@@ -24,7 +24,6 @@ import { setRole } from "@/store/role-slice";
 import "./_style.scss";
 import { loginVolunteer } from "@/store/login-post";
 import { useNavigate } from "react-router";
-import { toast, Toaster } from "sonner";
 
 const formSchema = z.object({
   phone_number: z
@@ -87,13 +86,11 @@ useEffect(() => {
     navigate('/');
   } else{
     // navigate('/register');
-     toast.error("Bu foydalanuvchi tizimdan ro'yxatdan o'tgan")
   }
 }, [isAuthenticated, token, navigate]);
 
   return (
     <>
-     <Toaster position="top-center" />
     <div className="container mx-auto h-screen flex flex-col justify-center p-5 md:p-20 gap-2 lg:gap-8">
       <div className="flex w-full">
         <img src={logo} alt="Logo Oltin qanot" className="w-[100px] block sm:hidden lg:block" />

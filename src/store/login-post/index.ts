@@ -10,7 +10,7 @@ interface LoginData {
 interface LoginResponse {
   access: string;
   refresh: string;
-  id: number; // ✅ qo‘shildi
+  id: number; 
 }
 
 interface LoginState {
@@ -41,10 +41,8 @@ export const loginVolunteer = createAsyncThunk<
         password: credentials.password,
       });
 
-      // ✅ Parol loglanmaydi
       console.log("Loginga so'rov yuborildi:", cleanedPhone);
 
-      // ✅ localStorage xavfsiz saqlash
       localStorage.setItem('token', res.data.access);
       localStorage.setItem('refresh', res.data.refresh);
 
@@ -81,7 +79,6 @@ const loginSlice = createSlice({
       state.token = null;
       state.isAuthenticated = false;
 
-      // ✅ Faqat kerakli localStorage itemlarni o‘chirish
       localStorage.removeItem('token');
       localStorage.removeItem('refresh');
       localStorage.removeItem('userId');

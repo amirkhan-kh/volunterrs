@@ -8,32 +8,51 @@ export interface User {
 }
 
 // 2. Volunteer profili
-export interface VolunteerProfile {
+// Foydalanuvchi (common) interface
+export interface User {
+  id: number;
+  phone_number: string;
+}
+
+// Umumiy profil: investor ham, volunteer ham
+export interface UserProfile {
   id: number;
   user: User;
-  name: string;
-  surname: string;
-  date_of_birth: string;
-  address: string;
-  gender: "M" | "F";
-  profile_pic: string | null;
-  email: string | null;
-  passport_num: string;
+
+  // Volunteer uchun
+  name?: string | null;
+  surname?: string | null;
+  date_of_birth?: string | null;
+  gender?: "M" | "F" | null;
+  profile_pic?: string | null;
+  email?: string | null;
+  passport_num?: string | null;
+
+  // Investor uchun
+  company_name?: string | null;
+  inn?: string | null;
+  company_owner?: string | null;
+  company_email?: string | null;
+  company_website?: string | null;
+
+  // Umumiy
+  address?: string | null;
 }
 
-// 3. API javobi
+// API javobi
 export interface FetchUserResponse {
   role: "volunteer" | "investor";
-  profile: VolunteerProfile;
+  profile: UserProfile;
 }
 
-// 4. Redux uchun state tipi
+// Redux state
 interface UserState {
-  profile: VolunteerProfile | null;
+  profile: UserProfile | null;
   role: "volunteer" | "investor" | null;
   loading: boolean;
   error: string | null;
 }
+
 
 // 5. Dastlabki holat
 const initialState: UserState = {

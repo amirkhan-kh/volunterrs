@@ -9,6 +9,7 @@ import { regions } from "@/db/org-btns";
 import { newsDb } from "@/db/news";
 import { PiCalendarBold } from "react-icons/pi";
 import { useLocation } from "react-router";
+import { useTranslation } from "react-i18next";
 
 export const NewsSectionNews: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,13 +26,13 @@ export const NewsSectionNews: React.FC = () => {
       : pathname === "/news-page"
       ? "Yangiliklar"
       : "Bo'lim";
-
+const { t } = useTranslation("EventsPageLang");
   return (
     <div className="container mx-auto py-20 px-4 lg:p-24">
       <div className="flex justify-between gap-6 mb-12">
         <div className="relative mb-6 w-full">
           <Input
-            placeholder="Volontyor ismi va familiyasi"
+            placeholder={`${t("inputPlaceholder")}`}
             className="w-full pl-12 py-6 text-[#2F508C] font-semibold text-[18px] placeholder:text-[#2F508C] border-transparent shadow-[0px_2px_6px_rgba(99,99,99,0.2)]"
           />
           <CiSearch className="absolute top-[10px] left-4" color="#2F508C" size={32} />
@@ -42,7 +43,7 @@ export const NewsSectionNews: React.FC = () => {
             onClick={() => setIsOpen((prev) => !prev)}
             className="bg-white hover:bg-white text-[#2F2E2E] border border-[#6495ED] py-5 text-[17px] font-medium w-70 shadow-[0px_2px_6px_rgba(99,99,99,0.2)] mt-2 flex items-center justify-between"
           >
-            <span>Hammasi</span>
+            <span>{t("seeAll")}</span>
             <motion.span animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.3 }}>
               <MdOutlineKeyboardArrowDown size={20} />
             </motion.span>

@@ -1,13 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// types.ts yoki slice faylingiz ichida
 export interface Order {
   id: number;
   customer_name: string;
   address: string;
   total_cost: number;
-  payment_method: "click" | "payme"; // boshqa variant bo‘lsa qo‘shing
+  payment_method: "click" | "payme"; 
   is_paid: boolean;
 }
 
@@ -20,7 +19,7 @@ export interface CreateOrderRequest {
   customer_name: string;
   address: string;
   total_cost: number;
-  payment_method: "click" | "payme"; // kerakli bo‘lsa boshqa qiymatlar
+  payment_method: "click" | "payme"; 
 }
 
 

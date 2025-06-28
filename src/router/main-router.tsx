@@ -11,6 +11,7 @@ import SinglePage from "@/pages/single-page";
 import ProfileInvestor from "@/pages/profile-investor";
 // import { PrivateRoute } from "./privete-route";
 import VolunterUserProfile from "@/components/sections/volunterr-user-profile";
+import ProfileVolunterrEdit from "@/components/sections/profile-volunterr-edit";
 
 
 export const router = createBrowserRouter([
@@ -32,6 +33,7 @@ export const router = createBrowserRouter([
       { path: "/investor-page", element: <InvestorPage /> },
       { path: "/donation-page", element: <DonationPage /> },
       { path: "/single-page/:id", element: <SinglePage /> },
+      { path: "/profile-edit", element: <ProfileVolunterrEdit/>},
       {
         path: "/profile-volunter",
         element: (

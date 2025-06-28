@@ -1,7 +1,5 @@
 import React, { useRef } from "react";
 import { PiCalendarBold } from "react-icons/pi";
-import { useViewCounter } from "@/hooks/use-view-counter";
-import { GrFormView } from "react-icons/gr";
 
 interface NewsCardProps {
   id: number;
@@ -20,7 +18,6 @@ export const NewsCard: React.FC<NewsCardProps> = ({
   dataCalendar,
   onClick,
 }) => {
-  const { ref, viewCount } = useViewCounter();
   const reff = useRef<HTMLAnchorElement | null>(null);
 
 
@@ -28,7 +25,7 @@ export const NewsCard: React.FC<NewsCardProps> = ({
     <a
       href={`/single-page/${id}`}
       onClick={(e) => onClick(e, id)}
-      className="w-[285px] sm:w-[345px] bg-white shadow rounded-lg p-2 relative"
+      className="w-[285px] sm:w-[345px] bg-white shadow rounded-lg p-2 relative "
       ref={reff}
     >
       <img
@@ -47,7 +44,6 @@ export const NewsCard: React.FC<NewsCardProps> = ({
         <p>{dataCalendar}</p>
       </div>
 
-      <p className="text-gray-500 text-sm mt-3 flex items-center gap-1" ref={ref} ><GrFormView size={20}/> {viewCount}</p>
     </a>
   );
 };

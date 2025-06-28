@@ -51,7 +51,7 @@ const verifySlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(verifyCode.fulfilled, (state, action) => {
+      .addCase(verifyCode.fulfilled, (state) => {
         state.loading = false;
         state.verified = true;
       })

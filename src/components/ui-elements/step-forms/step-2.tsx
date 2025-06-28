@@ -20,7 +20,6 @@ import phoneSendCode from '../../../../public/voluntermedia/animation/code.json'
 import phoneSendCodeGreen from '../../../../public/voluntermedia/animation/greenstep2.json';
 import logo from '../../../../public/voluntermedia/Logo.png';
 import { verifyCode } from "@/store/verify-code-slice";
-import { toast, Toaster } from "sonner";
 
 const formSchema = z.object({
   phoneCode: z.string().min(6, "Tasdiqlash kodi 6 raqamdan iborat bo'lishi kerak."),
@@ -76,7 +75,6 @@ console.log(result);
 
   return (
     <div>
-     <Toaster position="top-center" />
     <div className="container mx-auto h-screen flex flex-col justify-center p-5 md:p-20 gap-2 lg:gap-8">
       <div className="flex w-full">
         <img src={logo} alt="Logo Oltin Qanot" className="w-[100px]  block sm:hidden lg:block" />

@@ -22,7 +22,7 @@ const SinglePage: React.FC = () => {
       <img
         src={project.img}
         alt={project.titleNews}
-        className="w-full object-cover h-[540px] rounded-2xl mb-8"
+        className="w-full object-cover h-[540px] rounded-2xl mb-8 responsive-img"
       />
       <p className="text-gray-500 text-sm mt-3 flex items-center ">
         <GrFormView size={20}/> {views} 

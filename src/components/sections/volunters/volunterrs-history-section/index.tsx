@@ -7,6 +7,7 @@ import ac4 from "../../../../../public/voluntermedia/icons/history/frame.svg";
 import ac5 from "../../../../../public/voluntermedia/icons/history/heart.svg";
 import { MdOutlineKeyboardArrowDown, MdOutlineDone } from "react-icons/md";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 const VolunterHistorySection: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpen1, setIsOpen1] = useState(false);
@@ -14,10 +15,11 @@ const VolunterHistorySection: React.FC = () => {
   const [isOpen3, setIsOpen3] = useState(false);
   const [isOpen4, setIsOpen4] = useState(false);
   const [isOpen5, setIsOpen5] = useState(false);
+  const {t} = useTranslation("AboutHistoryLang");
   return (
     <div className="container mx-auto py-20 p-4 lg:p-24">
       <h2 className="text-[#2F2E2E] text-2xl font-bold mb-8">
-        Bizning tariximiz
+        {t("title")}
       </h2>
       <div className="flex flex-col gap-6">
         <div className="">
@@ -34,7 +36,7 @@ const VolunterHistorySection: React.FC = () => {
                   isOpen ? "text-white" : "text-[#2F2E2E]"
                 }`}
               >
-                O’zbekistonda faol volontyor jamosi
+                {t("select1")}
               </h4>
             </div>
             <p
@@ -42,7 +44,7 @@ const VolunterHistorySection: React.FC = () => {
                 isOpen ? "text-white" : "text-[#2F2E2E]"
               }`}
             >
-              2016 yil 7 oktaybr
+              2016.y 7 october
               <motion.span
                 animate={{ rotate: isOpen ? 180 : 0 }}
                 transition={{ duration: 0.3 }}
@@ -62,10 +64,7 @@ const VolunterHistorySection: React.FC = () => {
               >
                 <div className="rounded-[6px] bg-white shadow-[0px_2px_8px_rgba(99,99,99,0.2)] py-6 px-10 -translate-y-1">
                   <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Amet debitis, id ab placeat similique porro iure molestiae
-                    cum hic quibusdam numquam error sit ad autem necessitatibus
-                    et
+                    {t("text1")}
                   </p>
                 </div>
               </motion.div>
@@ -84,7 +83,7 @@ const VolunterHistorySection: React.FC = () => {
                   isOpen1 ? "text-white" : "text-[#2F2E2E]"
                 }`}
               >
-                Volontyorni o’qituvchi kurslar
+                {t("select2")}
               </h4>
             </div>
             <p
@@ -92,7 +91,7 @@ const VolunterHistorySection: React.FC = () => {
                 isOpen1 ? "text-white" : "text-[#2F2E2E]"
               }`}
             >
-              2016 yil 7 oktaybr
+              2016.y 7 october
               <motion.span
                 animate={{ rotate: isOpen1 ? 180 : 0 }}
                 transition={{ duration: 0.3 }}
@@ -112,10 +111,7 @@ const VolunterHistorySection: React.FC = () => {
               >
                 <div className="rounded-[6px] bg-white shadow-[0px_2px_8px_rgba(99,99,99,0.2)] py-6 px-10 -translate-y-2">
                   <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Amet debitis, id ab placeat similique porro iure molestiae
-                    cum hic quibusdam numquam error sit ad autem necessitatibus
-                    et
+                    {t("text2")}
                   </p>
                 </div>
               </motion.div>
@@ -135,7 +131,7 @@ const VolunterHistorySection: React.FC = () => {
                   isOpen2 ? "text-white" : "text-[#2F2E2E]"
                 }`}
               >
-                Eng zo’r tahsabbusli loyihalar
+                {t("select3")}
               </h4>
             </div>
             <p
@@ -143,7 +139,7 @@ const VolunterHistorySection: React.FC = () => {
                 isOpen2 ? "text-white" : "text-[#2F2E2E]"
               }`}
             >
-              2016 yil 7 oktaybr
+              2016.y 7 october
               <motion.span
                 animate={{ rotate: isOpen2 ? 180 : 0 }}
                 transition={{ duration: 0.3 }}
@@ -163,10 +159,7 @@ const VolunterHistorySection: React.FC = () => {
               >
                 <div className="rounded-[6px] bg-white shadow-[0px_2px_8px_rgba(99,99,99,0.2)] py-6 px-10 -translate-y-2">
                   <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Amet debitis, id ab placeat similique porro iure molestiae
-                    cum hic quibusdam numquam error sit ad autem necessitatibus
-                    et
+                    {t("text3")}
                   </p>
                 </div>
               </motion.div>
@@ -186,7 +179,7 @@ const VolunterHistorySection: React.FC = () => {
                   isOpen3 ? "text-white" : "text-[#2F2E2E]"
                 }`}
               >
-                O’z madhiyasini yaratgan
+                {t("select4")}
               </h4>
             </div>
             <p
@@ -194,7 +187,7 @@ const VolunterHistorySection: React.FC = () => {
                 isOpen3 ? "text-white" : "text-[#2F2E2E]"
               }`}
             >
-              2016 yil 7 oktaybr
+              2016.y 7 october
               <motion.span
                 animate={{ rotate: isOpen3 ? 180 : 0 }}
                 transition={{ duration: 0.3 }}
@@ -213,11 +206,8 @@ const VolunterHistorySection: React.FC = () => {
                 className="overflow-hidden"
               >
                 <div className="rounded-[6px] bg-white shadow-[0px_2px_8px_rgba(99,99,99,0.2)] py-6 px-10 -translate-y-2">
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Amet debitis, id ab placeat similique porro iure molestiae
-                    cum hic quibusdam numquam error sit ad autem necessitatibus
-                    et
+                  <p className="w-[250px]">
+                    {t("text4")}
                   </p>
                 </div>
               </motion.div>
@@ -237,7 +227,7 @@ const VolunterHistorySection: React.FC = () => {
                   isOpen4 ? "text-white" : "text-[#2F2E2E]"
                 }`}
               >
-                Xalqaro volontyorlik ishlanmalar
+                {t("select5")}
               </h4>
             </div>
             <p
@@ -245,7 +235,7 @@ const VolunterHistorySection: React.FC = () => {
                 isOpen4 ? "text-white" : "text-[#2F2E2E]"
               }`}
             >
-              2016 yil 7 oktaybr
+              2016.y 7 october
               <motion.span
                 animate={{ rotate: isOpen4 ? 180 : 0 }}
                 transition={{ duration: 0.3 }}
@@ -265,10 +255,7 @@ const VolunterHistorySection: React.FC = () => {
               >
                 <div className="rounded-[6px] bg-white shadow-[0px_2px_8px_rgba(99,99,99,0.2)] py-6 px-10 -translate-y-2">
                   <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Amet debitis, id ab placeat similique porro iure molestiae
-                    cum hic quibusdam numquam error sit ad autem necessitatibus
-                    et
+                    {t("text5")}
                   </p>
                 </div>
               </motion.div>
@@ -288,7 +275,7 @@ const VolunterHistorySection: React.FC = () => {
                   isOpen5 ? "text-white" : "text-[#2F2E2E]"
                 }`}
               >
-                Yutuqlar bilan limmolim
+                {t("select6")}
               </h4>
             </div>
             <p
@@ -296,7 +283,7 @@ const VolunterHistorySection: React.FC = () => {
                 isOpen5 ? "text-white" : "text-[#2F2E2E]"
               }`}
             >
-              2016 yil 7 oktaybr
+              2016.y 7 october
               <motion.span
                 animate={{ rotate: isOpen5 ? 180 : 0 }}
                 transition={{ duration: 0.3 }}
@@ -316,10 +303,7 @@ const VolunterHistorySection: React.FC = () => {
               >
                 <div className="rounded-[6px] bg-white shadow-[0px_2px_8px_rgba(99,99,99,0.2)] py-6 px-10 -translate-y-2">
                   <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Amet debitis, id ab placeat similique porro iure molestiae
-                    cum hic quibusdam numquam error sit ad autem necessitatibus
-                    et
+                    {t("text6")}
                   </p>
                 </div>
               </motion.div>

@@ -6,11 +6,11 @@ export type TSlideContent = {
 
 import { useTranslation } from 'react-i18next';
 import intro1 from '../../public/images/intro1 14.png';
-import intro2 from '../../public/voluntermedia/icons/homeIcon/activ7.png';
-
+import intro3 from '../../public/voluntermedia/volunter-images/slider-1.jpg';
+import intro4 from '../../public/voluntermedia/volunter-images/slider-4.jpg'
 
 export const SliderContent = () => {
-  const { t } = useTranslation("Intro"); // yoki umumiy namespace bo‘lsa: t('slider.key')
+  const { t } = useTranslation("Intro"); 
   
   return [
     {
@@ -19,12 +19,12 @@ export const SliderContent = () => {
       subtitle: t("subtitle1"),
     },
     {
-      image: intro2,
+      image: intro4,
       title: t("title2"),
       subtitle: t("subtitle2"),
     },
     {
-      image: intro1,
+      image: intro3,
       title: t("title3"),
       subtitle: t("subtitle3"),
     },

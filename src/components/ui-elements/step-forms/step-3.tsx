@@ -33,7 +33,6 @@ import { FaLocationCrosshairs } from "react-icons/fa6";
 import { LeafletMap } from "../google-map";
 import { registerVolunteer } from "@/store/volunter-post";
 import { useNavigate } from "react-router";
-import { toast, Toaster } from "sonner";
 
 const formSchema = z
   .object({
@@ -84,7 +83,6 @@ export const Step3: React.FC = () => {
 
   const onSubmit = (values: FormSchemaType) => {
     if (!verified) {
-      alert("Iltimos, telefon raqamingizni SMS orqali tasdiqlang.");
       return;
     }
 
@@ -111,16 +109,13 @@ console.log("Registration success status:", success);
 
 useEffect(() => {
   if (success) {
-    navigate('/login'); // yoki boshqa sahifa
-  } else{
-      toast.error("Tasdiqlash kodingiz noto‘g‘ri!")
-  }
+    navigate('/login'); 
+  } 
 }, [success, navigate]);
 console.log(localStorage.getItem('token'));
 
   return (
     <>
-    <Toaster position="top-right" richColors />
     <div className="container mx-auto h-screen flex flex-col justify-center p-5 lg:p-20 gap-8">
       <div className="flex w-full">
         <img src={logo} alt="Logo Oltin qanot" className="w-[100px] hidden lg:block" />
@@ -228,7 +223,7 @@ console.log(localStorage.getItem('token'));
                             <DialogContent>
                               <DialogHeader>
                                 <DialogTitle>
-                                  <LuLocateFixed /> Manzilni tanlang
+                                  Manzilni tanlang
                                 </DialogTitle>
                                 <DialogDescription>
                                   Xarita orqali kerakli manzilni tanlang va "Saqlash" tugmasini bosing.

@@ -18,7 +18,6 @@ import { registerInvestor } from "@/store/investor-post";
 import type { AppDispatch, RootState } from '@/store/store-config';
 import { DialogDescription } from "@radix-ui/react-dialog";
 import { useNavigate } from "react-router";
-import { toast, Toaster } from "sonner";
 
 const formSchema = z.object({
   company_name: z.string().min(2, "Tashkilot nomi kerak"),
@@ -63,14 +62,11 @@ const GreenStep3 = () => {
   useEffect(() => {
     if (success) {
       navigate('/login'); // yoki boshqa sahifa
-    } else{
-        toast.error("Tasdiqlash kodingiz noto‘g‘ri!")
-    }
+    } 
   }, [success, navigate]);
 
   return (
     <>
-        <Toaster position="top-right" richColors />
 
     <div className="max-w-xl mx-auto p-6 bg-white rounded-xl shadow">
       <h2 className="text-2xl font-bold mb-6 text-center">Investor ro'yxatdan o'tish</h2>

@@ -2,49 +2,30 @@ import { Button } from "@/components/ui/button";
 import React from "react";
 import { MdDone } from "react-icons/md";
 import { CiBookmarkCheck } from "react-icons/ci";
-
+import { useTranslation } from "react-i18next";
 const Home: React.FC = () => {
+const {t} = useTranslation("AboutPageLang");
   return (
     <>
       <div className="container mx-auto py-14 px-4 lg:p-24">
         <div>
           <h3 className="font-semibold text-3xl text-[#2F2E2E] mb-7">
-            Foydalanish Qoidalari
+            {t("title")}
           </h3>
           <p className="text-2xl font-normal mb-9 leading-10">
-            Oltin Qanot web sayti foydalanuvchilar tomonidan quyida keltirilgan
-            saytdan foydalanish shartlari va qoidalariga rioya qilishni talab
-            qiladi. Foydalauvchi saytdan foydalanish shartlari va qoidalariga
-            o‘z roziligini saytga va undan keyin istalgan sahifaga kirish
-            paytidan boshlab bildirgan hisoblanadi. Oltin Qanot istalgan vaqtda
-            foydalanish Shartlari va qoidalarini yangi nashrini{" "}
+            {t("subtitle1")}
           </p>
           <p className="text-2xl font-normal mb-9 leading-10">
-            Barcha huquqlar himoyalangan. Foydalanuvchi saytning istalgan
-            sahifasida joylashgan, Poytaxt Bank tomonidan ro‘yxatdan o‘tkazilgan
-            yoki unga tegishli bo‘lgan har qanday ma'lumotni faqat shaxsiy
-            foydalanish yoki ko‘rib chiqish maqsadida nusxalash, o‘tkazish yoki
-            namoyish etish huquqiga ega bo‘lib
+            {t("subtitle2")}
           </p>
           <p className="text-2xl font-normal mb-9 leading-10">
-            Oltin Qanot web sayti foydalanuvchilar tomonidan quyida keltirilgan
-            saytdan foydalanish shartlari va qoidalariga rioya qilishni talab
-            qiladi. Foydalauvchi saytdan foydalanish shartlari va qoidalariga
-            o‘z roziligini saytga va undan keyin istalgan sahifaga kirish
-            paytidan boshlab bildirgan hisoblanadi. Oltin Qanot istalgan vaqtda
-            foydalanish Shartlari va qoidalarini yangi nashrini{" "}
+            {t("subtitle3")}
           </p>
           <p className="text-2xl font-normal mb-9 leading-10">
-            Barcha huquqlar himoyalangan. Foydalanuvchi saytning istalgan
-            sahifasida joylashgan, Poytaxt Bank tomonidan ro‘yxatdan o‘tkazilgan
-            yoki unga tegishli bo‘lgan har qanday ma'lumotni faqat shaxsiy
-            foydalanish yoki ko‘rib chiqish maqsadida nusxalash, o‘tkazish yoki
-            namoyish etish huquqiga ega bo‘lib
+            {t("subtitle4")}
           </p>
           <p className="text-2xl font-normal mb-9 leading-10">
-            Barcha huquqlar himoyalangan. Foydalanuvchi saytning istalgan
-            sahifasida joylashgan, Poytaxt Bank tomonidan ro‘yxatdan o‘tkazilgan
-            yoki{" "}
+            {t("subtitle5")}
           </p>
         </div>
       </div>
@@ -53,13 +34,13 @@ const Home: React.FC = () => {
           <span className="border border-[#6495ED] p-1 rounded-sm">
             <MdDone color="#6495ED"/>
           </span>
-          Men foydalanish qoidalari bilan tanishdim va o’z roziligimni beraman
+          {t("subtitle6")}
         </p>
         <Button
         
           className="bg-[#6495ED] hover:bg-[#6495ED]  w-full text-[20px] py-4">
           <CiBookmarkCheck size={34}/>
-          Roziman
+          {t("btn")}
         </Button>
       </div>
     </>

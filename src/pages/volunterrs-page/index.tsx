@@ -6,7 +6,7 @@ const Volunterrs: React.FC = () => {
   return (
     <div>
       <Intro/>
-      <h3 className='text-3xl font-semibold px-24'>
+      <h3 className='container mx-auto text-3xl font-semibold px-24'>
         Volontyors
       </h3>
       <SearchTeamRegion/>

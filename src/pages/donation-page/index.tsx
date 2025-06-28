@@ -7,6 +7,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "@/store/store-config";
 import { createOrder, type CreateOrderResponse } from "@/store/payment-post";
+import { useTranslation } from "react-i18next";
 
 const DonationPage: React.FC = () => {
   const navigate = useNavigate();
@@ -40,22 +41,22 @@ const DonationPage: React.FC = () => {
     }
   });
   };
-
+const {t} = useTranslation("DonationLang");
   return (
     <div className="py-10 px-2 lg:px-24">
       <h3 className="flex items-center gap-9 font-medium text-2xl sm:text-3xl mb-14">
         <GoArrowLeft onClick={() => navigate(-1)} className="w-14 sm:w-8" />
-        Inklyuziv yoshlarni qo’llab-quvvatlash uchun o’z hissangizni qo’shing
+        {t("topTitle")}
       </h3>
 
       <div className="bg-white py-16 px-2 lg:px-52 mb-4">
         <h4 className="text-[#2F2E2E] text-3xl font-medium">
-          O’z hissangizni qo’shing
+          {t("title")}
         </h4>
         <p className="text-[16px] mb-9">Kerakli ma’lumotlarni kiriting</p>
 
         <form onSubmit={(e) => e.preventDefault()}>
-          <p>F.I.SH</p>
+          <p>{t("input1")}</p>
           <Input
             placeholder="To’liq ismingizni kiriting"
             className="border border-[#6495ED] p-5 mb-8"
@@ -63,7 +64,7 @@ const DonationPage: React.FC = () => {
             onChange={(e) => setFullName(e.target.value)}
           />
 
-          <p>Manzilingiz</p>
+          <p>{t("input2")}</p>
           <Input
             placeholder="Manzilingizni kiriting"
             className="border border-[#6495ED] p-5 mb-8"
@@ -71,7 +72,7 @@ const DonationPage: React.FC = () => {
             onChange={(e) => setAddress(e.target.value)}
           />
 
-          <p>Ehson miqdorini kiriting</p>
+          <p>{t("input3")}</p>
           <Input
             type="number"
             placeholder="O’z miqdoringizni kiriting"
@@ -80,7 +81,7 @@ const DonationPage: React.FC = () => {
             onChange={(e) => setAmount(Number(e.target.value))}
           />
 
-          <p>To’lov usulini tanlang</p>
+          <p>{t("input4")}</p>
           <RadioGroup
             value={paymentMethod}
             onValueChange={(val) => setPaymentMethod(val as "click" | "payme")}
@@ -110,7 +111,7 @@ const DonationPage: React.FC = () => {
             onClick={handleSubmit}
             className="bg-[#6495ED] text-white px-6 py-3 rounded-lg mt-8"
           >
-            Hissangizni qo’shing
+            {t("paymentMethod1")}
           </button>
         </form>
       </div>
