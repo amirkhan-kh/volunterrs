@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const authApi = axios.create({
-  baseURL: 'http://volunteers.uz:8443/user/',
+  baseURL: 'http://localhost:8000/user/',
   headers: {
     'Content-Type': 'application/json',
   },
