@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
-import { sliderContent } from "@/db/slide";
+import { SliderContent } from "@/db/slide";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -52,9 +52,9 @@ const Intro: React.FC = () => {
     beforeChange: (_: number, next: number) => setActiveIndex(next),
     dotsClass: "slick-dots custom-dots",
   };
+  const sliderContent= SliderContent()
   return (
-    <div className="container  mx-auto px-1 lg:px-4 py-2 relative  z-10 min-h-[500px]">
-      {/*   slayderlar */}
+    <div className="container  mx-auto px-1 lg:px-4 py-2 relative  z-10 min-h-[200px] ">
       <Slider ref={sliderRef} {...settings}>
         {sliderContent.map((item, index) => (
           <div key={index} className=" slide-item p-0 py-4">
@@ -62,7 +62,7 @@ const Intro: React.FC = () => {
               <img
                 src={item.image}
                 alt={item.title}
-                className="w-full object-cover h-[500px] rounded-lg"
+                className="w-full object-cover h-[500px] rounded-lg  responsive-img"
               />
               <div className="py-5 text-left">
                 <h2 className="text-[17px] sm:text-[28px] md:text-[38px] font-semibold md:font-bold mb-2">

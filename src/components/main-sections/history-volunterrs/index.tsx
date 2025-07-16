@@ -1,11 +1,11 @@
 import React from 'react'
 import { useRef, useState } from "react";
 import Slider from "react-slick";
-import { sliderContent } from "@/db/slide";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import './intro.css'; 
+import { SliderContent } from '@/db/slide';
 const HistoryVolunterr:React.FC = () => {
     const [activeIndex, setActiveIndex] = useState(0);
   const sliderRef = useRef<Slider>(null);
@@ -26,6 +26,7 @@ const HistoryVolunterr:React.FC = () => {
     beforeChange: (_: number, next: number) => setActiveIndex(next),
     dotsClass: "slick-dots custom-dots",
   };
+  const sliderContent = SliderContent()
   return (
    <div className="container  mx-auto px-2 py-2 relative min-h-[500px]">
 

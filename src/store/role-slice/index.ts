@@ -6,7 +6,7 @@ interface IRoleState {
 }
 
 const initialState: IRoleState = {
-    role: null
+    role: null,
 } 
 
 const roleSlice = createSlice({

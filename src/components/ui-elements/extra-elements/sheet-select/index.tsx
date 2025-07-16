@@ -2,16 +2,18 @@ import React, { useState } from "react";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { AnimatePresence, motion } from "framer-motion";
 import { NavLink } from "react-router";
+import { useTranslation } from "react-i18next";
 
 export const SelectSheet: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+   const { t } = useTranslation("Header");
   return (
     <div className="w-full">
       <button
         onClick={() => setIsOpen((prev) => !prev)}
         className="bg-white hover:bg-white text-[#2F2E2E] flex items-center justify-between"
       >
-        <span>Biz haqimizda</span>
+        <span> {t("nav2")}</span>
         <motion.span
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.3 }}
@@ -38,7 +40,7 @@ export const SelectSheet: React.FC = () => {
                     isActive ? "text-indigo-400" : "text-[#1C1C1C]"
                   }
                 >
-                  Volontyorlik nima
+                 {t("selectOption1")}
                 </NavLink>
               </button>
 
@@ -51,7 +53,7 @@ export const SelectSheet: React.FC = () => {
                     isActive ? "text-indigo-400" : "text-[#1C1C1C]"
                   }
                 >
-                  Tariximiz
+                 {t("selectOption2")}
                 </NavLink>
               </button>
 
@@ -64,7 +66,7 @@ export const SelectSheet: React.FC = () => {
                     isActive ? "text-indigo-400" : "text-[#1C1C1C]"
                   }
                 >
-                  Jamoamiz
+                  {t("selectOption3")}
                 </NavLink>
               </button>
 
@@ -77,7 +79,7 @@ export const SelectSheet: React.FC = () => {
                     isActive ? "text-indigo-400" : "text-[#1C1C1C]"
                   }
                 >
-                  Rasmlar
+                 {t("selectOption4")}
                 </NavLink>
               </button>
             </div>
@@ -93,13 +95,15 @@ export const SelectSheet: React.FC = () => {
 
 const SelectSheet2: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+   const { t } = useTranslation("Header");
+
   return (
     <div className="w-full">
       <button
         onClick={() => setIsOpen((prev) => !prev)}
         className="bg-white hover:bg-white text-[#2F2E2E] flex items-center justify-between"
       >
-        <span>Volantyor</span>
+        <span> {t("nav5")}</span>
         <motion.span
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.3 }}
@@ -130,7 +134,7 @@ const SelectSheet2: React.FC = () => {
                     isActive ? "text-indigo-400" : "text-[#1C1C1C]"
                   }
                 >
-                  Volantyorlik
+                  {t("selectOption5")}
                 </NavLink>
               </button>
 
@@ -143,7 +147,7 @@ const SelectSheet2: React.FC = () => {
                     isActive ? "text-indigo-400" : "text-[#1C1C1C]"
                   }
                 >
-                  Investor
+                  {t("selectOption6")}
                 </NavLink>
               </button>
             </div>

@@ -7,6 +7,9 @@ export const authApi = axios.create({
   },
 });
 
+
+
+
 authApi.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');
@@ -18,10 +21,13 @@ authApi.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// noAuthApi.ts
+// noAuthApi.ts tokensiz so'rovlar uchun ishlatiladi
+
+
+
 
 export const noAuthApi = axios.create({
-  baseURL: 'http://volunteers.uz:8443/user/',
+  baseURL: 'http://volunteers.uz:8443/user/v2/',
   headers: {
     'Content-Type': 'application/json',
   },

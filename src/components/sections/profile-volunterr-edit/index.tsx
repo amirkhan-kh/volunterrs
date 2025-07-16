@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import React, { useState } from "react";
+import React, {  useState } from "react";
 import { IoIosArrowBack } from "react-icons/io";
 import { TbEdit } from "react-icons/tb";
 import { FaLocationCrosshairs } from "react-icons/fa6";
@@ -29,6 +29,9 @@ const ProfileVolunterrEdit: React.FC = () => {
   const [open, setOpen] = useState(false);
   console.log(open);
   
+
+
+
   const handleLocationSelect = (selectedAddress: string) => {
     setAddress(selectedAddress); 
     setOpen(false); 
@@ -53,10 +56,15 @@ const ProfileVolunterrEdit: React.FC = () => {
   const years = Array.from({ length: currentYear - 1950 + 1 }, (_, i) =>
     (1950 + i).toString()
   );
+
+
+
   return (
     <div className="px-2 sm:px-20 py-10 w-full">
       <div className="flex items-center justify-between ">
-        <Button className="bg-transparent hover:bg-[#6494ed20] border border-[#6495ED]">
+        <Button
+        onClick={() => window.history.back()}
+        className="bg-transparent hover:bg-[#6494ed20] border border-[#6495ED]">
           <IoIosArrowBack color="#6495ED" />
         </Button>
         <p className="text-[18px] sm:text-[30px] font-semibold leading-[0.5px] tracking-[0.5px] text-[#2F2E2E]">

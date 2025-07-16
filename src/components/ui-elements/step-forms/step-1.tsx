@@ -14,7 +14,7 @@ import "./_style.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useAppDispatch, type RootState } from "@/store/store-config";
 import { setRole } from "@/store/role-slice";
-import { sendCode } from "@/store/login-slice";
+import { sendCode, setPhoneNumber } from "@/store/login-slice";
 
 const formSchema = z.object({
   phoneNumber: z
@@ -23,15 +23,18 @@ const formSchema = z.object({
     .max(13, { message: "Telefon raqam maksimal 13 ta belgidan oshmasligi kerak." }),
 });
 
-export const Step1: React.FC = () => {
+interface Step1Props {
+  onNext: () => void; // 👈 yangi prop
+}
+export const Step1: React.FC<Step1Props> = ({ onNext }) =>{
   const dispatch = useDispatch();
   const role = useSelector((state: RootState) => state.role.role);
   const dispatchApp = useAppDispatch();
-
-
- useEffect(() => {
-  let storedRole = localStorage.getItem("role") as "volunterr" | "investor" | null;
-
+  
+  
+  useEffect(() => {
+    let storedRole = localStorage.getItem("role") as "volunterr" | "investor" | null;
+    
   if (!storedRole) {
     storedRole = "volunterr";
     localStorage.setItem("role", storedRole); 
@@ -48,31 +51,27 @@ export const Step1: React.FC = () => {
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const result = await dispatchApp(sendCode(values.phoneNumber));
-    console.log(result);
-    
-    if (sendCode.fulfilled.match(result)) {
+ const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const result = await dispatchApp(sendCode(values.phoneNumber));
+  if (sendCode.fulfilled.match(result)) {
+    dispatch(setPhoneNumber(values.phoneNumber));
     console.log("SMS yuborildi:", result.payload);
-    } else {
+    onNext();
+  } else {
     console.error("Xatolik:", result.payload || result.error);
-    console.log(result.payload || "SMS yuborishda xatolik yuz berdi");
   }
-    
-    
-  };
-  console.log(sendCode);
+};
 
   const animationToShow = role === "investor" ? phoneAnimeGreen : phoneAnime;
 
   return (
-    <div className="custom container mx-auto h-screen flex flex-col justify-center p-20 gap-8">
+    <div className="custom container mx-auto h-screen flex flex-col justify-center p-5 md:p-20 gap-2 lg:gap-8">
       <div className="flex w-full">
-        <img src={logo} alt="Logo Oltin qanot" className="w-[100px]" />
+        <img src={logo} alt="Logo Oltin qanot" className="w-[100px] block sm:hidden lg:block" />
       </div>
 
-      <div className="flex items-center justify-between">
-        <div id={role === "volunterr" ? "step1" : undefined} className="p-0">
+      <div className="flex items-center justify-center lg:justify-between">
+        <div id={role === "volunterr" ? "step1" : undefined} className="p-0 hidden lg:block">
           <Lottie
             animationData={animationToShow}
             loop

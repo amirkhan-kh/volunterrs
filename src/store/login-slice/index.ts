@@ -5,7 +5,7 @@ import type { AxiosError } from 'axios';
 interface SendCodeResponse {
   success: boolean;
   message: string;
-  code?: string;
+  phone_number?: string;
 }
 
 interface LoginState {
@@ -29,8 +29,8 @@ export const sendCode = createAsyncThunk<
   async (phone_number, { rejectWithValue }) => {
     try {
       const res = await noAuthApi.post('send/code/', { phone_number });
+      console.log(res);
       return res.data as SendCodeResponse;
-      console.log(res.data);
       
     } catch (err) {
       const error = err as AxiosError<{ message?: string }>;
@@ -43,7 +43,12 @@ export const sendCode = createAsyncThunk<
 const loginSlice = createSlice({
   name: 'login',
   initialState,
-  reducers: {},
+  reducers: {
+     setPhoneNumber: (state, action) => {
+    if (!state.data) state.data = { success: true, message: "", phone_number: "" };
+    state.data.phone_number = action.payload;
+  },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(sendCode.pending, (state) => {
@@ -60,5 +65,7 @@ const loginSlice = createSlice({
       });
   },
 });
+export const { setPhoneNumber } = loginSlice.actions;
+
 
 export default loginSlice.reducer;

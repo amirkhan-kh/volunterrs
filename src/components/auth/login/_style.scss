@@ -1,7 +1,10 @@
 #login{
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
    #loginImg{
     background-image: url("/voluntermedia/icons/login/loginBlue/wave2.png"), url("/public/voluntermedia/icons/login/loginBlue/wave1.png");
     width: 100vw;

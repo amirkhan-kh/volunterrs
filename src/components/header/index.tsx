@@ -15,6 +15,7 @@ import NavDropdaownAbout, {
   NavDropdaownVolunterrs,
 } from "@/components/ui-elements/nav-dropdawn";
 import "./_style.scss";
+import { FaRegUserCircle } from "react-icons/fa";
 
 const Header: React.FC = () => {
   const [showSearch, setShowSearch] = useState(false);
@@ -57,6 +58,10 @@ const Header: React.FC = () => {
     setShowlang(false);
   };
 
+  const token = localStorage.getItem("token");
+  console.log(token);
+  
+
   return (
     <>
       <header className="z-50 relative">
@@ -67,19 +72,19 @@ const Header: React.FC = () => {
                 <SheetNavigation />
               </div>
               <img src={homeLogo} alt="bosh logo" className="hidden md:block" />
-               {!showSearch && (
-              <div className="block md:hidden">
-                <div className="lg:block ">
-                  <h1 className="text-[20px] font-bold text-[#6495ED] md:hidden">
-                    {getTitleFromPath(location.pathname)}
-                  </h1>
-                  <h1 className="text-[20px] font-bold text-[#6495ED] hidden md:block">
-                    OLTIN QANOT
-                  </h1>
+              {!showSearch && (
+                <div className="block md:hidden">
+                  <div className="lg:block ">
+                    <h1 className="text-[20px] font-bold text-[#6495ED] md:hidden">
+                      {getTitleFromPath(location.pathname)}
+                    </h1>
+                    <h1 className="text-[20px] font-bold text-[#6495ED] hidden md:block">
+                      OLTIN QANOT
+                    </h1>
+                  </div>
                 </div>
-              </div>
               )}
-               <div className="hidden md:block">
+              <div className="hidden md:block">
                 <div className="lg:block ">
                   <h1 className="text-[20px] font-bold text-[#6495ED] md:hidden">
                     {getTitleFromPath(location.pathname)}
@@ -109,7 +114,7 @@ const Header: React.FC = () => {
                     </NavLink>
                   </li>
                   <NavLink
-                    to="/about-page"
+                    to="/events-page"
                     className={({ isActive }) =>
                       isActive ? "text-indigo-400" : "text-[#1C1C1C]"
                     }
@@ -119,7 +124,7 @@ const Header: React.FC = () => {
                     </li>
                   </NavLink>
                   <NavLink
-                    to="/events-page"
+                    to="/news-page"
                     className={({ isActive }) =>
                       isActive ? "text-indigo-400" : "text-[#1C1C1C]"
                     }
@@ -197,12 +202,22 @@ const Header: React.FC = () => {
                     </button>
                   </div>
                 )}
-                <Button
-                  variant="outline"
-                  className="hidden md:block border border-[#6495ED] "
-                >
-                  <NavLink to="/login">{t("btn1")}</NavLink>
-                </Button>
+                {token ? (
+                  // Token mavjud bo‘lsa — profilga havola va avatar
+                  <NavLink to="/profile-volunter" className="hidden md:block">
+                   <FaRegUserCircle size={24} color="#6495ED"/>
+
+                  </NavLink>
+                ) : (
+                  // Token mavjud bo‘lmasa — Ro‘yxatdan o‘tish tugmasi
+                  <Button
+                    variant="outline"
+                    className="hidden md:block border border-[#6495ED]"
+                  >
+                    <NavLink to="/register">{t("btn1")}</NavLink>
+                  </Button>
+                )}
+
                 {!showlang && (
                   <Button
                     variant="outline"
@@ -233,7 +248,7 @@ const Header: React.FC = () => {
               animate={{ opacity: 1, y: -10 }}
               exit={{ opacity: 0, y: -30 }}
               transition={{ duration: 0.3 }}
-              className="hidden sm:block bg-[rgba(255,255,255,0)] backdrop-blur-1xl z-50 absolute    w-full"
+              className="hidden sm:block lg:hidden bg-[rgba(255,255,255,0)] backdrop-blur-1xl z-50 absolute    w-full"
             >
               <BottomNavbar />
             </motion.div>
