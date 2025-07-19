@@ -30,7 +30,9 @@ const initialState: RegisterState = {
   error: null,
   success: false,
 };
-
+interface ErrorResponse {
+  message?: string;
+}
 export const registerVolunteer = createAsyncThunk<
   RegisterResponse,
   VolunteerRegisterData,
@@ -53,9 +55,9 @@ export const registerVolunteer = createAsyncThunk<
       localStorage.setItem('role', 'volunteer');
       return res.data;
     } catch (err) {
-      const error = err as AxiosError<any>;
+      const error = err as AxiosError<ErrorResponse>;
         if (error.response?.status === 400) {
-            return rejectWithValue(error.response.data.message || 'Ma\'lumotlar noto\'g\'ri');
+            return rejectWithValue(error.response?.data?.message || 'Ma\'lumotlar noto\'g\'ri');
         }
      console.log("Xatolik:", error.response?.data)
     }

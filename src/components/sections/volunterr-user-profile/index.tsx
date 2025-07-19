@@ -17,6 +17,8 @@ import { setRole } from "@/store/role-slice";
 const VolunterUserProfile: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { profile, loading, error } = useSelector((state: RootState) => state.userMe);
+  console.log(profile);
+  
   console.log("profile", profile);
   const role = useSelector((state: RootState) => state.role.role);
   useEffect(() => {
@@ -28,9 +30,7 @@ const VolunterUserProfile: React.FC = () => {
     if (storedRole && !role) {
       dispatch(setRole(storedRole));
     }
-  }, [dispatch]);
-  console.log(profile);
-  console.log(role);
+  }, [dispatch,  role]);
 
   if (loading) return <div>Yuklanmoqda...</div>;
   if (error) return <div>Xato: {error}</div>;

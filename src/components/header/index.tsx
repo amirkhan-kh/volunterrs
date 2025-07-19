@@ -203,8 +203,8 @@ const Header: React.FC = () => {
                   </div>
                 )}
                 {token ? (
-                  // Token mavjud bo‘lsa — profilga havola va avatar
-                  <NavLink to="/profile-volunter" className="hidden md:block">
+                  // Token mavjud bo‘lsa — profilga havola
+                  <NavLink to="/profile-volunter" className="hidden sm:block">
                    <FaRegUserCircle size={24} color="#6495ED"/>
 
                   </NavLink>
@@ -229,7 +229,7 @@ const Header: React.FC = () => {
                   </Button>
                 )}
 
-                <Button className="hidden md:block bg-[#6495ED] text-white hover:bg-[#7ea8f5]">
+                <Button className="hidden sm:block bg-[#6495ED] text-white hover:bg-[#7ea8f5]">
                   <NavLink to="/donation-page">{t("btn2")}</NavLink>
                 </Button>
                 <div className="hidden sm:block">

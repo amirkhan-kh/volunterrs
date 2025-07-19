@@ -2,9 +2,9 @@ import React from "react";
 import org2 from "../../../../../public/voluntermedia/icons/homeIcon/org2.png";
 import org1 from "../../../../../public/voluntermedia/icons/homeIcon/org1.png";
 import "./_style.scss";
-import { bankApps, priceBtn } from "@/db/org-btns";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Button } from "@/components/ui/button";
+// import { bankApps, priceBtn } from "@/db/org-btns";
+// import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+// import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
 const HomeOrganization: React.FC = () => {
   const {t} = useTranslation("HomeVolandOrgLang");
@@ -41,7 +41,7 @@ const HomeOrganization: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="container mx-auto px-3 lg:px-[100px]">
+      {/* <div className="container mx-auto px-3 lg:px-[100px] ">
         <div className="flex flex-col gap-7 py-[120px] ">
           <div className="flex items-center gap-3 overflow-x-auto scroll-smooth no-scrollbar">
             {priceBtn.map((item, i) => (
@@ -53,7 +53,7 @@ const HomeOrganization: React.FC = () => {
               </Button>
             ))}
           </div>
-          <div className="grid grid-cols-2  sm:flex items-center gap-3 sm:gap-3 overflow-x-auto scroll-smooth no-scrollbar">
+          <div className="grid grid-cols-2  sm:flex items-center gap-3 sm:gap-3 overflow-x-auto scroll-smooth no-scrollbar ">
             {bankApps.map((item, i) => (
               <div
                 key={i}
@@ -74,7 +74,7 @@ const HomeOrganization: React.FC = () => {
             {t("pay")}
           </Button>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

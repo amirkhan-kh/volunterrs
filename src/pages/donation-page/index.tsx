@@ -15,7 +15,6 @@ const DonationPage: React.FC = () => {
   const orderState = useSelector((state: RootState) => state.paymentPost);
   console.log("Order State:", orderState);
 
-  // 📌 Input state'lar
   const [fullName, setFullName] = useState("");
   const [address, setAddress] = useState("");
   const [amount, setAmount] = useState<number | "">("");
@@ -90,12 +89,12 @@ const {t} = useTranslation("DonationLang");
             {bankApps.map((item, i) => (
               <div
                 key={i}
-                className="border-[#EAEAEA] border my-2 rounded-[12px] gap-2 lg:gap-6 p-2.5 sm:w-64 flex items-center justify-between"
+                className="border-[#EAEAEA] border my-2 rounded-[12px] gap-2 lg:gap-6 p-2.5   sm:w-64 flex items-center justify-between  h-[80px]"
               >
                 <img
                   src={item.img}
                   alt="Bank Apps Img"
-                  className="w-16 sm:w-20 lg:w-36 h-10 sm:h-12 lg:h-14 object-cover"
+                  className="w-[50px] sm:w-[100px] "
                 />
                 <RadioGroupItem
                   value={item.value}

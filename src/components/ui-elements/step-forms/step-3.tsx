@@ -63,6 +63,7 @@ export const Step3: React.FC = () => {
 
   const dispatch = useDispatch<AppDispatch>();
   const role = useSelector((state: RootState) => state.role.role);
+console.log(role);
 
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(formSchema),
@@ -105,6 +106,7 @@ export const Step3: React.FC = () => {
 
   const navigate = useNavigate();
 const success = useSelector((state: RootState) => state.postVolunterr.success);
+
 console.log("Registration success status:", success);
 
 useEffect(() => {
@@ -215,7 +217,6 @@ console.log(localStorage.getItem('token'));
                             <LuLocateFixed color="#808080CC"/>
 
                           </Button>
-                          <Input {...field} />
                           <Dialog>
                             <DialogTrigger className="p-2 border rounded">
                               <FaLocationCrosshairs />

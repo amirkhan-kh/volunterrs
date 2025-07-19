@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import axios, { AxiosError }  from "axios";
 
 export interface Order {
   id: number;
@@ -41,10 +41,13 @@ export const createOrder = createAsyncThunk<
   { rejectValue: string }
 >("order/createOrder", async (orderData, { rejectWithValue }) => {
   try {
-    const res = await axios.post("http://localhost:8000/payment/v2/order/create/", orderData);
+    const res = await axios.post("https://volunteers.uz:8443/payment/v2/order/create/", orderData);
     return res.data;
-  } catch (err: any) {
-    return rejectWithValue(err.response?.data?.detail || "Buyurtma yaratishda xatolik");
+  } catch (err) {
+     const error = err as AxiosError<{ detail?: string }>;
+    return rejectWithValue(
+      error.response?.data?.detail || "Buyurtma yaratishda xatolik"
+    );
   }
 });
 

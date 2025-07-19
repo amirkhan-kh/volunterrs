@@ -54,7 +54,7 @@ export const registerInvestor = createAsyncThunk<
 
       return res.data;
     } catch (err) {
-      const error = err as AxiosError<any>;
+      const error = err as AxiosError<AxiosError>;
       if (error.response?.status === 400) {
         const detail =
           typeof error.response.data === 'object'
