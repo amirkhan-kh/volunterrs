@@ -9,7 +9,7 @@ import "./_style.scss";
 import GreenStep3 from "@/components/ui-elements/step-forms/step-green3";
 
 const Register: React.FC = () => {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(3);
   const handleNext = () => setStep((prev) => prev + 1);
 
   const role = useSelector((state: RootState) => state.role.role);
